@@ -1,1 +1,1 @@
-# clone_project_prac
+# clone_project_KuKKa
