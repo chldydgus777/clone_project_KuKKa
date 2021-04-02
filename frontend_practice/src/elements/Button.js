@@ -35,7 +35,7 @@ const Button = (props) => {
 };
 
 Button.defaultProps = {
-  text: false,
+  text: "버튼",
   children: null,
   color: "white",
   bg: "black",

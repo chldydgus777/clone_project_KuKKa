@@ -1,22 +1,21 @@
 import "./App.css";
 import Header from "../components/Header";
-import styled from "styled-components"
-
+import styled from "styled-components";
+import PostList from "../components/PostList";
 function App() {
   return (
     <div className="App">
       <Header />
-      <Main/>      
+      <PostList />
+      <Main />
     </div>
   );
 }
 
 const Main = styled.div`
-  background : green;
-  width : 100%;
-  height : 800px;
+  background: green;
+  width: 100%;
+  height: 800px;
 `;
 
 export default App;
-
-
