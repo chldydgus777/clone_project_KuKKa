@@ -8,6 +8,7 @@ import { history } from "../redux/configureStore";
 import React from "react";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
+import PostDetail from "../pages/PostDetail";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/" component={PostList} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/detail/:id" component={PostDetail} />
         <Main />
       </ConnectedRouter>
     </React.Fragment>
