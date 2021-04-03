@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import Text from "../elements/Text";
+import Button from "../elements/Button";
 import LogoPic from "../images/LogoPhoto.png";
+import "../shared/mystyle.css";
+import { history } from "../redux/configureStore";
 
 const Header = (props) => {
   return (
@@ -10,49 +12,75 @@ const Header = (props) => {
         {/* 로그인, 회원가입, 기업제휴 */}
         <PageMoving>
           <PageMoving_Ul>
-            <PageMoving_list>로그인</PageMoving_list>
-            <PageMoving_list>회원가입(1000포인트 지급!)</PageMoving_list>
-            <PageMoving_list>기업제휴</PageMoving_list>
+            <PageMoving_list className="toLogin">
+              <button
+                onClick={() => {
+                  history.push("/login");
+                }}
+              >
+                로그인
+              </button>
+            </PageMoving_list>
+            <PageMoving_list className="toSignup">
+              <button
+                onClick={() => {
+                  history.push("/signup");
+                }}
+              >
+                회원가입(1000포인트 지급!)
+              </button>
+            </PageMoving_list>
+            <PageMoving_list className="toCompany">
+              <button>기업제휴</button>
+            </PageMoving_list>
           </PageMoving_Ul>
         </PageMoving>
         {/* Navbar */}
         <Navbar>
           {/* 로고 들어가는 곳 */}
-          <LogoBox />
+          <LogoBox>
+            <button
+              onClick={() => {
+                history.push("/");
+              }}
+            ></button>
+          </LogoBox>
           {/* Nav 버튼들 들어가는 곳 */}
           <NavbarBtn_Ul>
-            <NavbarBtn_list>꽃 정기구독</NavbarBtn_list>
-            <NavbarBtn_list>꽃다발</NavbarBtn_list>
-            <NavbarBtn_list>당일배송</NavbarBtn_list>
-            <NavbarBtn_list>플라워클래스</NavbarBtn_list>
-            <NavbarBtn_list>소품샵</NavbarBtn_list>
-            <NavbarBtn_list>이벤트</NavbarBtn_list>
+            <NavbarBtn_list>
+              <button>꽃 정기구독</button>
+            </NavbarBtn_list>
+            <NavbarBtn_list>
+              <button>꽃다발</button>
+            </NavbarBtn_list>
+            <NavbarBtn_list>
+              <button>당일배송</button>
+            </NavbarBtn_list>
+            <NavbarBtn_list>
+              <button>플라워클래스</button>
+            </NavbarBtn_list>
+            <NavbarBtn_list>
+              <button>소품샵</button>
+            </NavbarBtn_list>
+            <NavbarBtn_list>
+              <button>이벤트</button>
+            </NavbarBtn_list>
           </NavbarBtn_Ul>
           {/* 아이콘 박스 */}
           <IconBox>
             <Icon>
-              <i class="fas fa-user"></i>
+              <button>
+                <i class="fas fa-user"></i>
+              </button>
             </Icon>
             <Icon>
-              <i class="fas fa-shopping-bag"></i>
+              <button>
+                <i class="fas fa-shopping-bag"></i>
+              </button>
             </Icon>
           </IconBox>
         </Navbar>
       </HeaderFrame>
-      {/* Main picture */}
-      <MainPicture>
-        <MainPicture_textBox>
-          <Text margin="14px 0 14px 50px" text_align="left" size="30px" bold>
-            꾸까 꽃다발
-          </Text>
-          <Text margin="0 0 0 50px" text_align="left">
-            계절을 담은 꽃다발로
-          </Text>
-          <Text margin="0 0 0 50px" text_align="left">
-            당신의 일상을 특별한 날로 만들어보세요.
-          </Text>
-        </MainPicture_textBox>
-      </MainPicture>
     </React.Fragment>
   );
 };
@@ -61,7 +89,11 @@ const Header = (props) => {
 const HeaderFrame = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding: 0 40px;
+  padding: 0 60px;
+  color: #222222;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none solid rgb(34, 34, 34);
 `;
 
 // 로그인, 회원가입, 기업제휴 부분들
@@ -69,6 +101,8 @@ const PageMoving = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row-reverse;
+  font-size: 14px;
+  font-weight: 300;
 `;
 const PageMoving_Ul = styled.ul`
   display: flex;
@@ -91,6 +125,10 @@ const LogoBox = styled.div`
   background-image: url("${LogoPic}");
   background-size: cover;
   background-position: center;
+  & > button {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 // nav bar buttons
@@ -103,7 +141,16 @@ const NavbarBtn_Ul = styled.ul`
 const NavbarBtn_list = styled.li`
   list-style: none;
   background: white;
-  margin-right: 10px;
+  & > button {
+    font-size: 18px;
+    padding-bottom: 10px;
+    border-bottom: 5px solid white;
+    box-sizing: border-box;
+  }
+
+  & > button:hover {
+    border-bottom: 5px solid #fed049;
+  }
 `;
 
 // 내 정보 & 장바구니 버튼
@@ -116,30 +163,9 @@ const IconBox = styled.div`
 const Icon = styled.div`
   background: white;
   margin-right: 20px;
-  font-size: 24px;
-`;
-
-// 메인 사진 kukka-2-media-123.s3.amazonaws.com/static/kukkart_new/img/kukka/category_flower.png
-// 메인 글귀
-
-const MainPicture = styled.div`
-  background-image: url("https://kukka-2-media-123.s3.amazonaws.com/static/kukkart_new/img/kukka/category_flower.png");
-  width: 100%;
-  height: 40vh;
-  display: flex;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  padding: 0px 60px 0px 60px;
-  box-sizing: border-box;
-`;
-
-const MainPicture_textBox = styled.div`
-  width: 40%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  & > button {
+    font-size: 24px;
+  }
 `;
 
 export default Header;

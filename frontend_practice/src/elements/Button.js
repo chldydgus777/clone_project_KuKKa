@@ -52,6 +52,11 @@ const HeaderBtn = styled.button`
   padding: ${(props) => props.padding};
   border: ${(props) => props.border};
   border-radius: ${(props) => props.border_Radius};
+  font-size: 15px;
+  margin-top: 35px;
+  :focus {
+    background: ${(props) => props.bg};
+  }
 `;
 
 export default Button;

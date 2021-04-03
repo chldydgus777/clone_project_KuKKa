@@ -1,0 +1,24 @@
+.toSignup {
+  border-left: 1px solid #d3d3d3;
+  border-right: 1px solid #d3d3d3;
+  padding: 0 10px;
+}
+
+.toLogin {
+  margin-right: 10px;
+}
+
+.toCompany {
+  margin-left: 10px;
+}
+
+button,
+button:focus {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
