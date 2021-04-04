@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Text from "../elements/Text";
 import Button from "../elements/Button";
+import CommentList from "../components/CommentList";
 
 const PostDetail = (props) => {
   return (
@@ -112,6 +113,8 @@ const PostDetail = (props) => {
             </Detail_Info_Text>
           </Detail_Info_Box>
         </Detail_Info_Frame>
+        {/* CommentList */}
+        <CommentList />
       </PostDetail_Frame>
     </React.Fragment>
   );

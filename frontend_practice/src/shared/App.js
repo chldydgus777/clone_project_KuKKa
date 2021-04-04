@@ -19,16 +19,9 @@ function App() {
         <Route exact path="/" component={PostList} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/detail/:id" component={PostDetail} />
-        <Main />
       </ConnectedRouter>
     </React.Fragment>
   );
 }
-
-const Main = styled.div`
-  background: green;
-  width: 100%;
-  height: 800px;
-`;
 
 export default App;
