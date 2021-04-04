@@ -25,28 +25,45 @@ const PostDetail = (props) => {
             <Summary_Box>
               <Summary_Text>행복을 전하는 밝은 기운</Summary_Text>
               <Flower_Name>딜라잇 에디션</Flower_Name>
-              <Per_Discount>10%</Per_Discount>
+              <Per_Discount>
+                <span>10</span>%
+              </Per_Discount>
               <Old_Price>42,900원 {"->"}</Old_Price>
               <Price>37,900원</Price>
             </Summary_Box>
             {/* Notice Box */}
             <Notice_Box>
-              <Notice_Fresh>3만원 이상 구매 시, 무료배송!</Notice_Fresh>
+              <Notice_Fresh>
+                3만원 이상 구매 시, <span>무료배송!</span>
+              </Notice_Fresh>
             </Notice_Box>
             {/* Field Set */}
             <Field_Set>
               <Field_Set_Row>
                 <Field_Set_Title>수령일</Field_Set_Title>
-                <Field_Set_Date type="date"></Field_Set_Date>
+                <Field_Set_Date
+                  type="date"
+                  placeholder="수령일을 선택해주세요"
+                ></Field_Set_Date>
               </Field_Set_Row>
               <Field_Set_Row>
                 <Field_Set_Title>수량</Field_Set_Title>
-                <Field_Set_Btn>123</Field_Set_Btn>
+                <Field_Set_Btn>
+                  <button>
+                    <i class="fas fa-minus-circle"></i>
+                  </button>
+                  <span>1</span>
+                  <button>
+                    <i class="fas fa-plus-circle"></i>
+                  </button>
+                </Field_Set_Btn>
               </Field_Set_Row>
             </Field_Set>
             {/* Price Info Box */}
             <Price_InfoBox>
-              <Delivery_Type>무료배송</Delivery_Type>
+              <Delivery_Type>
+                <span>무료배송</span>
+              </Delivery_Type>
               <Total_Price_Title>총 주문금액</Total_Price_Title>
               <Total_Price>37,900원</Total_Price>
             </Price_InfoBox>
@@ -55,14 +72,14 @@ const PostDetail = (props) => {
               <Button
                 is_header
                 text="장바구니"
-                width="100%"
+                width="200px"
                 bg="#ECECEC"
                 color="#1b1b1b"
               />
               <Button
                 is_header
                 text="바로구매"
-                width="100%"
+                width="200px"
                 bg="#FFCD32"
                 color="#1b1b1b"
               />
@@ -71,7 +88,9 @@ const PostDetail = (props) => {
         </Detail_Wrapping_Box>
         {/* Product Detail Info */}
         <Detail_Info_Header>
-          <Text size="16px">상품설명</Text>
+          <Text size="16px" margin="0">
+            상품설명
+          </Text>
         </Detail_Info_Header>
         {/* Product Detail Info Frame*/}
         <Detail_Info_Frame>
@@ -110,7 +129,6 @@ const PostDetail_Header = styled.div`
 const PostDetail_Frame = styled.div`
   width: 100%;
   padding: 0 60px;
-  background: red;
   box-sizing: border-box;
 `;
 // Detail Wrapping Box
@@ -135,94 +153,211 @@ const PostDetail_InfoBox = styled.div`
 // Summary Box
 const Summary_Box = styled.div`
   border-bottom: 1px solid #ececec;
-  background: yellow;
   padding: 0 0 20px;
 `;
 
-const Summary_Text = styled.p``;
+const Summary_Text = styled.p`
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 100;
+  letter-spacing: -0.24px;
+  color: #787878;
+`;
 
-const Flower_Name = styled.p``;
+const Flower_Name = styled.p`
+  font-size: 26px;
+  line-height: 38px;
+  font-weight: 700;
+  letter-spacing: -0.39px;
+  color: #222;
+`;
 
-const Per_Discount = styled.span``;
+const Per_Discount = styled.span`
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 300;
+  letter-spacing: -0.24px;
+  color: #ff4e50;
+  & > span {
+    font-weight: bold;
+  }
+  margin-right: 5px;
+`;
 
-const Old_Price = styled.span``;
+const Old_Price = styled.span`
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 100;
+  letter-spacing: -0.24px;
+  color: #787878;
+`;
 
-const Price = styled.span``;
+const Price = styled.span`
+  font-size: 26px;
+  line-height: 38px;
+  font-weight: 500;
+  letter-spacing: -0.39px;
+  color: #222222;
+`;
 
 // Notice Box
 
 const Notice_Box = styled.div`
   padding: 20px 0;
-  background: lightblue;
   border-top: 1px solid #ececec;
   border-bottom: 1px solid #ececec;
+  & > span {
+    color: #46cfa7;
+  }
 `;
 
-const Notice_Fresh = styled.p``;
+const Notice_Fresh = styled.p`
+  text-align: left;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 300;
+  letter-spacing: -0.24px;
+  color: #222;
+`;
 
 // Field Set
-const Field_Set = styled.div`
-  background: green;
-`;
+const Field_Set = styled.div``;
 
 const Field_Set_Row = styled.div`
   display: flex;
 `;
 
-const Field_Set_Title = styled.div``;
+const Field_Set_Title = styled.div`
+  text-align: left;
+  width: 150px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: -0.24px;
+  color: #222222;
+  display: flex;
+  align-items: center;
+`;
 
-const Field_Set_Date = styled.input``;
+const Field_Set_Date = styled.input`
+  width: 50%;
+  font-size: 20px;
+  border-radius: 4px;
+  padding: 5px 0%;
+  border: 1px solid #ececec;
+  color: #ececec;
+`;
 
 const Field_Set_Btn = styled.div`
-  background: pink;
+  width: 30%;
+  padding: 10px 10px;
+  display: flex;
+  & > button {
+    color: #ececec;
+    font-size: 18px;
+    margin: 0 10px;
+  }
 `;
 
 // Price Info
 
 const Price_InfoBox = styled.div`
-  background: orange;
+  text-align: right;
 `;
 
-const Delivery_Type = styled.p``;
+const Delivery_Type = styled.p`
+  & > span {
+    border-radius: 10px;
+    border: #ececec 1px solid;
+    background: #ececec;
+    font-size: 9px;
+    line-height: 18px;
+    font-weight: 400;
+    letter-spacing: -0.14px;
+    padding: 5px;
+    color: #0d0d0d;
+  }
+`;
 
-const Total_Price_Title = styled.span``;
+const Total_Price_Title = styled.span`
+  display: inline-block;
+  float: none;
+  margin-right: 20px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: -0.21px;
+  color: #222;
+`;
 
-const Total_Price = styled.span``;
+const Total_Price = styled.span`
+  display: inline-block;
+  float: none;
+  margin-top: -6px;
+  font-size: 26px;
+  line-height: 38px;
+  font-weight: 500;
+  letter-spacing: -0.39px;
+  color: #222;
+`;
 
 // Button Box
 
 const Btn_Box = styled.div`
+  text-align: right;
   display: flex;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 // Detail Info Box
 
 const Detail_Info_Header = styled.div`
   text-align: center;
-  padding: 40px 60px 0;
+  padding: 40px 0 0 0;
   box-sizing: border-box;
-  background: yellow;
+  font-weight: 500;
+  border-bottom: 1px solid #ececec;
+  & > p {
+    font-size: 24px;
+    border-top: 2px solid #ffcd32;
+    vertical-align: middle;
+    padding: 10px 0;
+    width: 100%;
+  }
 `;
 
 const Detail_Info_Frame = styled.div`
   box-sizing: border-box;
   padding: 0 60px;
-  background: gray;
 `;
 
 const Detail_Info_Box = styled.div`
   padding: 70px 0 80px;
   margin: 0 81.3333px;
+  & > img {
+    width: 100%;
+  }
 `;
 
 // 그 다음 이미지 들어가고 (사이즈 740 * 740)
 
 const Detail_Info_Title = styled.p`
   margin: 40px 0 0;
+  font-size: 30px;
+  line-height: 45px;
+  font-weight: 700;
+  letter-spacing: -0.45px;
+  color: #222;
 `;
 
 const Detail_Info_Text = styled.p`
   margin: 20px 0 0;
+  font-size: 18px;
+  line-height: 30px;
+  font-weight: 300;
+  letter-spacing: -0.27px;
+  color: #222;
 `;
 
 export default PostDetail;
