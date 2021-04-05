@@ -9,19 +9,31 @@ import React from "react";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import PostDetail from "../pages/PostDetail";
+import Footer from "../components/Footer"
+import Grid from "../elements/Grid"
 
 function App() {
   return (
     <React.Fragment>
       <Header />
       <ConnectedRouter history={history}>
+      <Grid>
         <Route exact path="/login" component={Login} />
         <Route exact path="/" component={PostList} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/detail/:id" component={PostDetail} />
+        <Main />
+        </Grid>
+        <Footer/>
       </ConnectedRouter>
     </React.Fragment>
   );
 }
+
+const Main = styled.div`
+background : #eee;
+min-height : 100%;
+
+`;
 
 export default App;

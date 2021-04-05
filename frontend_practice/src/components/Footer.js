@@ -50,7 +50,7 @@ const Footer = (props) => {
 const FooterFrame = styled.div` 
 max-width : 100%;
 margin : 0 auto;
-magin-top : 100px;
+margin-top : 100px;
 padding : 60px;
 background : #222222;
 `;
@@ -69,7 +69,7 @@ text-align : left;
 const Sc = styled.div`
 display : flex;
 font-size : 22px;
-line-height: 33px
+line-height: 33px;
 float : left;
 font-weight : bold;
 height : 100%
