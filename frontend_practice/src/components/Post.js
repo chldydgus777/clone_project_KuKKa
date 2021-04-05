@@ -12,7 +12,7 @@ const Post = (props) => {
         <MainImage>
           <img
             src="https://kukka-2-media-123.s3.amazonaws.com/media/class-name/Contents/2356/category.jpg"
-            style={{ height: "265px" }}
+            style={{ width:"100%", height: "265px" }}
           ></img>
         </MainImage>
         <Detail>
