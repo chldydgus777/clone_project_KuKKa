@@ -35,5 +35,6 @@ const ElInput = styled.input`
   font-size: 16px;
   border-radius: 4px;
   margin-bottom: 15px;
+  type : ${props => props.type}; 
 `;
 export default Input;

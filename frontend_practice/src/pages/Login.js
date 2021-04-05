@@ -3,10 +3,15 @@ import styled from "styled-components";
 import Input from "../elements/Input";
 import Button from "../elements/Button";
 import Text from "../elements/Text";
-import SnsLogo from "../images/kakaoLogo.png";
+
+import login_facebook from "../images/login_Facebook.png";
+import login_naver from "../images/login_Naver.png";
+import login_kakao from "../images/login_Kakao.png";
+
 
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
+import { emailCheck } from "../shared/common";
 
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -25,12 +30,18 @@ const Login = (props) => {
 
   const login = () => {
     if (id === "" || pwd === "") {
-      window.alert("아이디 또는 비밀번호가 공란입니다.");
+      window.alert("아이디 또는 비밀번호가 비어있습니다.");
       return;
     }
+
+    if (!emailCheck(id)) {
+      window.alert("이메일 형식이 맞지 않습니다!");
+      return;
+    }
+
     console.log(id, pwd);
     dispatch(userActions.loginAction({ user_id: id, user_pwd: pwd }));
-    console.log("로그인 했어!");
+    console.log("로그인 완료!");
   };
 
   return (
@@ -51,9 +62,14 @@ const Login = (props) => {
         <SnsLoginBox>
           <Text>SNS계정으로 간편 로그인</Text>
           <SnsIconBox>
-            <button>
-              <img src={SnsLogo}></img>
-            </button>
+              <button>
+              <img src={login_facebook}></img>
+              </button>
+              <button>
+              <img src={login_naver}></img>
+              </button>
+              <button><img src={login_kakao}></img>
+              </button>
           </SnsIconBox>
           <Button
             is_header
@@ -101,11 +117,14 @@ const SnsLoginBox = styled.div`
 
 // sns Icon box
 const SnsIconBox = styled.div`
+width: 100%;
+margin : 0 auto;
   & > button {
     width: 20%;
   }
   & > button > img {
-    width: 100%;
+    
+    display : flex;
   }
 `;
 

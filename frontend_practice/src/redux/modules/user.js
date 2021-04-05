@@ -2,9 +2,11 @@ import { createAction, handleActions } from "redux-actions";
 // 불변성 관리 위한 친구
 import { produce } from "immer";
 import { setCookie, getCookie, deleteCookie } from "../../shared/Cookie";
+import axios from 'axios';
 
 // actions
 //const LOG_IN = "LOG_IN";
+const SIGN_UP = "SIGN_UP"
 const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
 const SET_USER = "SET_USER";
@@ -12,8 +14,10 @@ const SET_USER = "SET_USER";
 // initialState
 
 const initialState = {
-  user: null,
+  user: [
+  ],
   is_login: false,
+  signup : null,
 };
 
 const user_initial = {
@@ -61,8 +65,36 @@ const loginDB = (id, pwd) => {
   };
 };
 
-const signupDB = (id, pwd, user_name) => {
+// 회원가입DB
+
+const signupDB = (id, pwd, nickname) => {
   return function (dispatch, getState, { history }) {
+    axios ({
+      method : "POST",
+      url : "http://3.143.205.173:8080/api/signup",
+      data : {
+        username : id,
+        nickname : nickname,
+        password : pwd,
+        
+      },
+    })
+      .then((res) => {
+        // console 찍어보기 res 
+        dispatch(
+          setUser({
+            username : id,
+            nickname : nickname,
+            password : pwd,
+          })
+        )
+        history.push('/');
+      });
+    }
+}
+
+      
+
     // auth
     //       .createUserWithEmailAndPassword(id, pwd)
     //       .then((user) => {
@@ -88,8 +120,7 @@ const signupDB = (id, pwd, user_name) => {
     //         var errorMessage = error.message;
     //         console.log(errorCode, errorMessage);
     //       });
-  };
-};
+
 
 const loginCheckDB = () => {
   return function (dispatch, getState, { history }) {
@@ -136,6 +167,7 @@ const logOutDB = () => {
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
+const signUp = createAction(SIGN_UP, (id, pwd) => ({ id, pwd }))
 
 // reducer
 
@@ -145,6 +177,12 @@ export default handleActions(
       produce(state, (draft) => {
         setCookie("is_login", "success");
         draft.user = action.payload.user;
+        draft.is_login = true;
+      }),
+
+      [SIGN_UP]: (state, action) =>
+      produce(state, (draft) => {
+        draft.user.push(action.payload.user);
         draft.is_login = true;
       }),
 
@@ -166,6 +204,7 @@ const actionCreators = {
   //logIn,
   loginAction,
   logOut,
+  signUp,
   setUser,
   getUser,
   signupDB,

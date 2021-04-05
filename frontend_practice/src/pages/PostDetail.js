@@ -51,11 +51,11 @@ const PostDetail = (props) => {
                 <Field_Set_Title>수량</Field_Set_Title>
                 <Field_Set_Btn>
                   <button>
-                    <i class="fas fa-minus-circle"></i>
+                    <i className="fas fa-minus-circle"></i>
                   </button>
                   <span>1</span>
                   <button>
-                    <i class="fas fa-plus-circle"></i>
+                    <i className="fas fa-plus-circle"></i>
                   </button>
                 </Field_Set_Btn>
               </Field_Set_Row>

@@ -26,7 +26,7 @@ const PostList = (props) => {
       <PostListFrame>
         <PostList_RecommendBox>
           <button>
-            <i class="fas fa-chevron-down"></i>
+            <i className="fas fa-chevron-down"></i>
           </button>
           추천순
         </PostList_RecommendBox>

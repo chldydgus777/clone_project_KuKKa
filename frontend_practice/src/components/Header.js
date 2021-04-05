@@ -6,6 +6,9 @@ import "../shared/mystyle.css";
 import { history } from "../redux/configureStore";
 import { getCookie } from "../shared/Cookie";
 
+import Cart from "../images/func_cart.png";
+import Mypage from "../images/func_my.png";
+
 const Header = (props) => {
   const is_login = getCookie("is_login") === "success" ? true : false;
 
@@ -62,12 +65,12 @@ const Header = (props) => {
             <IconBox>
               <Icon>
                 <button>
-                  <i class="fas fa-user"></i>
+                  <i className="fas fa-user"></i>
                 </button>
               </Icon>
               <Icon>
                 <button>
-                  <i class="fas fa-shopping-bag"></i>
+                  <i className="fas fa-shopping-bag"></i>
                 </button>
               </Icon>
             </IconBox>
@@ -140,12 +143,12 @@ const Header = (props) => {
           <IconBox>
             <Icon>
               <button>
-                <i class="fas fa-user"></i>
+              <img src={Mypage}></img>
               </button>
             </Icon>
             <Icon>
               <button>
-                <i class="fas fa-shopping-bag"></i>
+              <img src={Cart}></img>
               </button>
             </Icon>
           </IconBox>

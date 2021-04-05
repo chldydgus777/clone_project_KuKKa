@@ -20,7 +20,7 @@ const Footer = (props) => {
               <img
                 style={{
                   width: "32px",
-                  height: "32px;",
+                  height: "32px",
                   cursor: "pointer",
                 }}
                 src={facebook}
@@ -34,7 +34,7 @@ const Footer = (props) => {
               <img
                 style={{
                   width: "32px",
-                  height: "32px;",
+                  height: "32px",
                   margin: "0px 20px 0px 20px ",
                   cursor: "pointer",
                 }}
@@ -52,7 +52,7 @@ const Footer = (props) => {
               <img
                 style={{
                   width: "32px",
-                  height: "32px;",
+                  height: "32px",
                   cursor: "pointer",
                 }}
                 src={youtube}
@@ -80,7 +80,7 @@ const Footer = (props) => {
             <img
               style={{
                 width: "150px",
-                height: "63px;",
+                height: "63px",
                 backgroundSize: "1252px 845px",
                 right: "16%",
               }}
