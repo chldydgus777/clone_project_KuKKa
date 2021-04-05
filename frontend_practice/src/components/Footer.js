@@ -69,7 +69,7 @@ text-align : left;
 const Sc = styled.div`
 display : flex;
 font-size : 22px;
-line-height: 33px;
+line-height: 33px
 float : left;
 font-weight : bold;
 height : 100%
