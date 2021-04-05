@@ -30,12 +30,12 @@ const PostList = (props) => {
           </button>
           추천순
         </PostList_RecommendBox>
-        <Grid display="flex" flex_direction="row" height="100%" width="100%">
+        <GridSub>
           <Post />
           <Post />
           <Post />
           <Post />
-        </Grid>
+        </GridSub>
       </PostListFrame>
     </React.Fragment>
   );
@@ -78,6 +78,12 @@ const PostList_RecommendBox = styled.div`
   display: flex;
   flex-direction: row-reverse;
   margin-bottom: 40px;
+`;
+
+const GridSub = styled.div`
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-row-gap: 1em;
 `;
 
 export default PostList;

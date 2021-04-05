@@ -4,8 +4,78 @@ import Button from "../elements/Button";
 import LogoPic from "../images/LogoPhoto.png";
 import "../shared/mystyle.css";
 import { history } from "../redux/configureStore";
+import { getCookie } from "../shared/Cookie";
 
 const Header = (props) => {
+  const is_login = getCookie("is_login") === "success" ? true : false;
+
+  if (is_login) {
+    return (
+      <React.Fragment>
+        <HeaderFrame>
+          {/* 로그인, 회원가입, 기업제휴 */}
+          <PageMoving>
+            <PageMoving_Ul>
+              <PageMoving_list className="toMyInfo">
+                <button>내정보</button>
+              </PageMoving_list>
+              <PageMoving_list className="toSignOut">
+                <button>로그아웃</button>
+              </PageMoving_list>
+              <PageMoving_list className="toCompany">
+                <button>기업제휴</button>
+              </PageMoving_list>
+            </PageMoving_Ul>
+          </PageMoving>
+          {/* Navbar */}
+          <Navbar>
+            {/* 로고 들어가는 곳 */}
+            <LogoBox>
+              <button
+                onClick={() => {
+                  history.push("/");
+                }}
+              ></button>
+            </LogoBox>
+            {/* Nav 버튼들 들어가는 곳 */}
+            <NavbarBtn_Ul>
+              <NavbarBtn_list>
+                <button>꽃 정기구독</button>
+              </NavbarBtn_list>
+              <NavbarBtn_list>
+                <button>꽃다발</button>
+              </NavbarBtn_list>
+              <NavbarBtn_list>
+                <button>당일배송</button>
+              </NavbarBtn_list>
+              <NavbarBtn_list>
+                <button>플라워클래스</button>
+              </NavbarBtn_list>
+              <NavbarBtn_list>
+                <button>소품샵</button>
+              </NavbarBtn_list>
+              <NavbarBtn_list>
+                <button>이벤트</button>
+              </NavbarBtn_list>
+            </NavbarBtn_Ul>
+            {/* 아이콘 박스 */}
+            <IconBox>
+              <Icon>
+                <button>
+                  <i class="fas fa-user"></i>
+                </button>
+              </Icon>
+              <Icon>
+                <button>
+                  <i class="fas fa-shopping-bag"></i>
+                </button>
+              </Icon>
+            </IconBox>
+          </Navbar>
+        </HeaderFrame>
+      </React.Fragment>
+    );
+  }
   return (
     <React.Fragment>
       <HeaderFrame>

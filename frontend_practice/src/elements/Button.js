@@ -13,6 +13,7 @@ const Button = (props) => {
     border,
     border_Radius,
     children,
+    _onClick,
   } = props;
 
   const styles = {
@@ -27,7 +28,9 @@ const Button = (props) => {
   if (is_header) {
     return (
       <React.Fragment>
-        <HeaderBtn {...styles}>{text ? text : children}</HeaderBtn>
+        <HeaderBtn {...styles} onClick={_onClick}>
+          {text ? text : children}
+        </HeaderBtn>
       </React.Fragment>
     );
   }
@@ -43,6 +46,7 @@ Button.defaultProps = {
   padding: "12px",
   border: "none",
   border_Radius: "4px",
+  _onClick: () => {},
 };
 
 const HeaderBtn = styled.button`

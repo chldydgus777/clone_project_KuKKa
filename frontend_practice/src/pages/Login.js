@@ -4,14 +4,43 @@ import Input from "../elements/Input";
 import Button from "../elements/Button";
 import Text from "../elements/Text";
 import SnsLogo from "../images/kakaoLogo.png";
+
+import { useDispatch } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/user";
+
 const Login = (props) => {
+  const dispatch = useDispatch();
+  const [id, setId] = React.useState("");
+  const [pwd, setPwd] = React.useState("");
+
+  const changeId = (e) => {
+    console.log(e.target.value);
+    setId(e.target.value);
+  };
+
+  const changePwd = (e) => {
+    console.log(e.target.value);
+    setPwd(e.target.value);
+  };
+
+  const login = () => {
+    if (id === "" || pwd === "") {
+      window.alert("아이디 또는 비밀번호가 공란입니다.");
+      return;
+    }
+    console.log(id, pwd);
+    dispatch(userActions.loginAction({ user_id: id, user_pwd: pwd }));
+    console.log("로그인 했어!");
+  };
+
   return (
     <LoginFrame>
       <LoginTitle>로그인</LoginTitle>
       <LoginBox>
-        <Input placeholder="아이디(이메일)" />
-        <Input placeholder="비밀번호" />
+        <Input placeholder="아이디(이메일)" _onChange={changeId} />
+        <Input placeholder="비밀번호" _onChange={changePwd} />
         <Button
+          _onClick={login}
           is_header
           text="로그인"
           width="100%"
