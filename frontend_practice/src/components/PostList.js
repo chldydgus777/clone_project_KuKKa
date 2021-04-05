@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 import Text from "../elements/Text";
 import "../shared/mystyle.css";
-import Post from "./Post"
-import Grid from "../elements/Grid"
+import Post from "./Post";
+import Grid from "../elements/Grid";
 
 const PostList = (props) => {
   return (
@@ -30,28 +30,19 @@ const PostList = (props) => {
           </button>
           추천순
         </PostList_RecommendBox>
-        <Grid display="flex" flex_direction="row" height="100%"  width="15.4vw">
-      <Post/>    
-      <Post/>    
-      <Post/> 
-      <Post/>         
+        <Grid display="flex" flex_direction="row" height="100%" width="100%">
+          <Post />
+          <Post />
+          <Post />
+          <Post />
         </Grid>
-        
-        
-        
-  
-      
-      
       </PostListFrame>
-
     </React.Fragment>
   );
 };
 
-
 // 메인 사진 kukka-2-media-123.s3.amazonaws.com/static/kukkart_new/img/kukka/category_flower.png
 // 메인 글귀
-
 
 const MainPicture = styled.div`
   background-image: url("https://kukka-2-media-123.s3.amazonaws.com/static/kukkart_new/img/kukka/category_flower.png");
@@ -86,6 +77,7 @@ const PostList_RecommendBox = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row-reverse;
+  margin-bottom: 40px;
 `;
 
 export default PostList;
