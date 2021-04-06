@@ -33,10 +33,10 @@ const Login = (props) => {
       return;
     }
 
-    if (!emailCheck(id)) {
-      window.alert("이메일 형식이 맞지 않습니다!");
-      return;
-    }
+    // if (!emailCheck(id)) {
+    //   window.alert("이메일 형식이 맞지 않습니다!");
+    //   return;
+    // }
 
     console.log(id, pwd);
     dispatch(userActions.loginDB(id, pwd));

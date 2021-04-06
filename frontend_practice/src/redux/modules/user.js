@@ -41,7 +41,7 @@ const loginDB = (id, pwd) => {
   return function (dispatch, getState, { history }) {
     axios({
       method: "POST",
-      url: "http://3.143.205.173:8080/api/login",
+      url: "http://3.143.205.173:8080/api/authenticate",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json;charset=UTF-8",
@@ -53,7 +53,7 @@ const loginDB = (id, pwd) => {
     })
       .then((res) => {
         console.log(res);
-        sessionStorage.setItem("token", res.data);
+        sessionStorage.setItem("token", res.data.token);
         dispatch(
           setUser({
             username: id,
@@ -64,7 +64,7 @@ const loginDB = (id, pwd) => {
         window.alert("정상적으로 로그인 되었습니다!");
       })
       .catch((err) => {
-        window.alert(err.response.data.errorMessage);
+        window.alert(err.res.data.errorMessage);
       });
   };
 };
@@ -100,32 +100,6 @@ const signupDB = (id, pwd, nickname) => {
   };
 };
 
-// auth
-//       .createUserWithEmailAndPassword(id, pwd)
-//       .then((user) => {
-//         console.log(user);
-//         auth.currentUser
-//           .updateProfile({
-//             displayName: user_name,
-//           })
-//           .then(() => {
-//             dispatch(
-//               setUser({
-//                 user_name: user_name,
-//                 id: id,
-//                 user_profile: "",
-//                 uid: user.user.uid,
-//               })
-//             );
-//             history.push("/");
-//           });
-//       })
-//       .catch((error) => {
-//         var errorCode = error.code;
-//         var errorMessage = error.message;
-//         console.log(errorCode, errorMessage);
-//       });
-
 const loginCheckDB = () => {
   return function (dispatch, getState, { history }) {
     //const user = getState().user.user;
@@ -139,20 +113,6 @@ const loginCheckDB = () => {
         })
       );
     } else return;
-    // auth.onAuthStateChanged((user) => {
-    //   if (user) {
-    //     dispatch(
-    //       setUser({
-    //         user_name: user.displayName,
-    //         user_profile: "",
-    //         id: user.email,
-    //         uid: user.uid,
-    //       })
-    //     );
-    //   } else {
-    //     dispatch(logOut());
-    //   }
-    // });
   };
 };
 
@@ -161,10 +121,6 @@ const logOutDB = () => {
     sessionStorage.removeItem("token");
     dispatch(logOut());
     history.replace("/");
-    // auth.signOut().then(() => {
-    //   dispatch(logOut());
-    //   history.replace("/");
-    // });
   };
 };
 
