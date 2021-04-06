@@ -21,12 +21,12 @@
 //       console.log(id, pwd)
 //       if(id ==="" || pwd ===""){
 //         window.alert("아이디, 패스워드를 모두 입력해주세요! ")
-//         return 
+//         return
 //     }
 
 //     // if(!emailCheck(id)){
 //     //     window.alert("이메일 형식이 맞지않습니다.")
-//     //     return 
+//     //     return
 //     // }
 
 //     if(pwd !== pwd_check){
@@ -51,7 +51,7 @@
 //           <TextBox>비밀번호 확인</TextBox>
 //           <Input placeholder="비밀번호를 한 번 더 입력해주세요" type="password"  _onChange={(e) =>{setPwdCheck (e.target.value)}} />
 //         </InputRow>
-//         <Button _onClick={signup} 
+//         <Button _onClick={signup}
 //           is_header
 //           text="회원가입"
 //           width="100%"
@@ -135,9 +135,9 @@ const Signup = (props) => {
       <SignupTitle>회원가입</SignupTitle>
       <SignupBox>
         <InputRow>
-          <TextBox>이메일 (아이디)</TextBox>
+          <TextBox>아이디</TextBox>
           <Input
-            placeholder="예) kukkka@kukka.kr"
+            placeholder="예) henry76"
             _onChange={(e) => {
               setId(e.target.value);
             }}
@@ -162,9 +162,9 @@ const Signup = (props) => {
           />
         </InputRow>
         <InputRow>
-          <TextBox>닉네임</TextBox>
+          <TextBox>이메일</TextBox>
           <Input
-            placeholder="닉네임을 입력해주세요."
+            placeholder="이메일을 입력해주세요."
             _onChange={(e) => {
               setUserName(e.target.value);
             }}

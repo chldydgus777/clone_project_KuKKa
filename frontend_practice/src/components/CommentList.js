@@ -1,16 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 import Comment from "./Comment";
+import { useSelector } from "react-redux";
+import Rating from "../elements/Rating";
 
 const CommentList = (props) => {
+  const is_login = useSelector((state) => state.user.is_login);
+
   return (
     <Review_Frame>
       <Review_Header>
         <Review_Title>
           리뷰 <span>리뷰 작성 시 200P 적립 (사진 등록 시 300P)</span>
         </Review_Title>
-        <button>리뷰쓰기</button>
+        {is_login && <button>리뷰쓰기</button>}
       </Review_Header>
+      <Rating></Rating>
       {/* 리뷰 인박스 */}
       <Review_Inbox>
         <Review_Inbox_Title>

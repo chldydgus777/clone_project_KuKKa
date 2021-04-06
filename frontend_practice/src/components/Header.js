@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
-import Button from "../elements/Button";
 import LogoPic from "../images/LogoPhoto.png";
 import "../shared/mystyle.css";
 import { history } from "../redux/configureStore";
@@ -11,6 +10,24 @@ import Cart from "../images/func_cart.png";
 import Mypage from "../images/func_my.png";
 
 const Header = (props) => {
+  const ref = useRef(null);
+  const handleScroll = () => {
+    if (ref.current) {
+      if (ref.current.offsetTop < window.pageYOffset) {
+        ref.current.classList.add("sticky");
+      } else {
+        ref.current.classList.remove("sticky");
+      }
+    }
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", () => handleScroll);
+    };
+  }, []);
+
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
 
@@ -22,7 +39,7 @@ const Header = (props) => {
           <PageMoving>
             <PageMoving_Ul>
               <PageMoving_list className="greeting">
-                <button>회원님 환영합니다!</button>
+                <button>{localStorage.getItem("nick")}</button>
               </PageMoving_list>
               <PageMoving_list className="toMyInfo">
                 <button>내정보</button>
@@ -39,7 +56,7 @@ const Header = (props) => {
             </PageMoving_Ul>
           </PageMoving>
           {/* Navbar */}
-          <Navbar>
+          <Navbar id="navbar">
             {/* 로고 들어가는 곳 */}
             <LogoBox>
               <button
@@ -117,7 +134,7 @@ const Header = (props) => {
           </PageMoving_Ul>
         </PageMoving>
         {/* Navbar */}
-        <Navbar>
+        <Navbar ref={ref}>
           {/* 로고 들어가는 곳 */}
           <LogoBox>
             <button
@@ -248,5 +265,7 @@ const Icon = styled.div`
     font-size: 24px;
   }
 `;
+
+// sticky header
 
 export default Header;
