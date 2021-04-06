@@ -147,6 +147,7 @@ const Signup = (props) => {
           <TextBox>비밀번호</TextBox>
           <Input
             placeholder="비밀번호를 입력해주세요"
+            type="password"
             _onChange={(e) => {
               setPwd(e.target.value);
             }}
@@ -156,6 +157,7 @@ const Signup = (props) => {
           <TextBox>비밀번호 확인</TextBox>
           <Input
             placeholder="비밀번호를 한 번 더 입력해주세요"
+            type="password"
             _onChange={(e) => {
               setPwdCheck(e.target.value);
             }}

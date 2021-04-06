@@ -2,53 +2,49 @@ import React from "react";
 import styled from "styled-components";
 import "../shared/App.css";
 import Grid from "../elements/Grid";
-import { history } from "../redux/configureStore";
+
 
 const Post = (props) => {
-  const { summary, name, per, old_price, price, size, text, delivery } = props;
+  const {mainImage, summary, flower, per, oldPrice, price, size, text, delivery } = props;
+
 
   return (
+   
     <Grid>
+     {/* card */}
       <Item>
-        <MainImage
-          onClick={() => {
-            history.push(`/detail/1`);
-          }}
-        >
+      <div style={{overflow:"hidden", width:"100%", height: "265px" }}>
+        <MainImage>
           <img
-            src="https://kukka-2-media-123.s3.amazonaws.com/media/class-name/Contents/2356/category.jpg"
-            style={{ width: "100%", height: "265px" }}
+            src={mainImage}
+            style={{width:"100%", height: "265px" }}
           ></img>
         </MainImage>
+        </div>
         <Detail>
           <Summary>{summary}</Summary>
-          <Name
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              history.push(`/detail/1`);
-            }}
-          >
-            {name}
-          </Name>
+          <Flower style={{ cursor: "pointer" }}>{flower}</Flower>
           <br />
           <Per>{per}</Per>
-          <Old_price>{old_price}</Old_price>
-          <Price>{price}</Price>
+          <Old_price>{oldPrice}</Old_price>
+          <Price style={{textAlign:"left" }}>{price}</Price>
           <br />
           <Size>{size}</Size>
           <Text>{text}</Text>
           <Delivery>{delivery}</Delivery>
         </Detail>
       </Item>
+
     </Grid>
   );
 };
 
 Post.defaultProps = {
+  mainImage : "https://kukka-2-media-123.s3.amazonaws.com/media/class-name/Contents/2356/0_1.jpg",
   summary: "수선화로 표현한 봄의 무드",
-  name: "수채화 에디션",
+  flower: "수채화 에디션",
   per: "10%",
-  old_price: "59,900원 ->",
+  oldPrice: "59,900원 ->",
   price: "53,900원",
   size: "XL",
   text: "size",
@@ -57,12 +53,13 @@ Post.defaultProps = {
 
 const Item = styled.div`
   padding: 0px 10px;
+  width : 285px;
 `;
 
 const MainImage = styled.a`
-  :hover {
+&  :hover {
     transform: scale(1.05);
-    transition: transform 0.7s;
+    transition: transform 0.5s;
   }
 `;
 
@@ -79,7 +76,7 @@ const Summary = styled.div`
   letter-spacing: -0.18px;
 `;
 
-const Name = styled.a`
+const Flower = styled.a`
   font-weight: bold;
   margin: 3px 0px;
   :hover {

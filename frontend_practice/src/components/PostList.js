@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import {useDispatch, useSelector} from "react-redux"
+import { actionCreators as productActions } from "../redux/modules/post";
+
 
 import Text from "../elements/Text";
 import "../shared/mystyle.css";
 import Post from "./Post";
-import Grid from "../elements/Grid";
+
+
+
 
 const PostList = (props) => {
+  
+  const dispatch = useDispatch()
+
+  const data = useSelector((state) => state.post.flower)
+  useEffect(() => {
+  dispatch(productActions.getProductsAPI())
+}, [])
+console.log(data)
+
   return (
     <React.Fragment>
       {/* Main picture */}
@@ -30,16 +44,19 @@ const PostList = (props) => {
           </button>
           추천순
         </PostList_RecommendBox>
+        
         <GridSub>
-          <Post />
-          <Post />
-          <Post />
-          <Post />
+        {data.map((i,idx)=>{ 
+          return <Post {...i} key={idx} />} )}
+
         </GridSub>
+
       </PostListFrame>
     </React.Fragment>
   );
 };
+
+
 
 // 메인 사진 kukka-2-media-123.s3.amazonaws.com/static/kukkart_new/img/kukka/category_flower.png
 // 메인 글귀
@@ -67,8 +84,7 @@ const MainPicture_textBox = styled.div`
 // 포스트 리스트의 윤곽
 const PostListFrame = styled.section`
   width: 100%;
-  height: 600px;
-  padding: 50px 60px;
+  padding: 50px 300px;
   box-sizing: border-box;
 `;
 
@@ -83,7 +99,7 @@ const PostList_RecommendBox = styled.div`
 const GridSub = styled.div`
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
-  grid-row-gap: 1em;
+  grid-row-gap: 4em;
 `;
 
 export default PostList;
