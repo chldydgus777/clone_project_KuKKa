@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Comment from "./Comment";
 import { useSelector } from "react-redux";
 import Rating from "../elements/Rating";
+import Modal from "react-modal";
+import Input from "../elements/Input";
 
 const CommentList = (props) => {
-  const is_login = useSelector((state) => state.user.is_login);
+  //const is_login = useSelector((state) => state.user.is_login);
+
+  const is_login = true;
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  // modal operation
+  // Open modal
+  const openModal = (e) => {
+    console.log(e);
+    setModalIsOpen(true);
+  };
+  // Close modal
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
   return (
     <Review_Frame>
@@ -13,9 +29,8 @@ const CommentList = (props) => {
         <Review_Title>
           리뷰 <span>리뷰 작성 시 200P 적립 (사진 등록 시 300P)</span>
         </Review_Title>
-        {is_login && <button>리뷰쓰기</button>}
+        {is_login && <button onClick={openModal}>리뷰쓰기</button>}
       </Review_Header>
-      <Rating></Rating>
       {/* 리뷰 인박스 */}
       <Review_Inbox>
         <Review_Inbox_Title>
@@ -29,6 +44,20 @@ const CommentList = (props) => {
       <Comment></Comment>
       <Comment></Comment>
       <Comment></Comment>
+
+      <ModalFrame>
+        <Modal isOpen={modalIsOpen} className="Modal">
+          <ModalTitle>리뷰 작성하기</ModalTitle>
+          <Rating></Rating>
+          <ElTextarea placeholder="리뷰 작성" rows={5} />
+          <ModalBtn className="ModalBtn">
+            <BtnInModal className="BtnInModal">작성 완료</BtnInModal>
+            <BtnInModal className="BtnInModal" onClick={closeModal}>
+              닫기
+            </BtnInModal>
+          </ModalBtn>
+        </Modal>
+      </ModalFrame>
     </Review_Frame>
   );
 };
@@ -107,4 +136,52 @@ const Review_Btn = styled.button`
   }
 `;
 
+// Comment Modal
+const ModalFrame = styled.div`
+  max-width: 400px;
+  max-height: 400px;
+`;
+
+const BtnInModal = styled.button`
+  padding: 15px 15px 15px 15px;
+  margin-top: 18px;
+  border: none;
+  border-radius: 10px;
+  background: white;
+  color: black;
+  font-weight: bolder;
+  :hover {
+    transform: scale(1.1);
+    transition: transform 200ms ease-in-out;
+    cursor: pointer;
+  }
+  :focus {
+    outline: none;
+  }
+`;
+
+const ModalBtn = styled.div`
+  width: 100%;
+  height: 40%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+const ModalTitle = styled.h2`
+  color: black;
+  background: white;
+  text-align: center;
+  width: 80%;
+  padding: 20px;
+  border-radius: 10px;
+`;
+
+const ElTextarea = styled.textarea`
+  border: 1px solid #212121;
+  border-radius: 4px;
+  width: 90%;
+  padding: 12px 4px;
+  box-sizing: border-box;
+`;
 export default CommentList;

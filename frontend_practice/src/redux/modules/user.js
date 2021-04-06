@@ -27,14 +27,14 @@ const user_initial = {
 const loginInfo = [];
 
 const loginAction = (user) => {
-  return function (dispatch, getState, { history }) {
-    console.log(history);
-    dispatch(setUser(user));
-    //실험
-    loginInfo.push(user);
-    console.log(loginInfo);
-    history.push("/");
-  };
+  // return function (dispatch, getState, { history }) {
+  //   console.log(history);
+  //   dispatch(setUser(user));
+  //   //실험
+  //   loginInfo.push(user);
+  //   console.log(loginInfo);
+  //   history.push("/");
+  // };
 };
 
 const loginDB = (id, pwd) => {

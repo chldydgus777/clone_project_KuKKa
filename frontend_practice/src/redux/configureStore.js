@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
 import User from "../redux/modules/user";
+import Comment from "../redux/modules/comment";
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   user: User,
+  comment: Comment,
   router: connectRouter(history),
 });
 

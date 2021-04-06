@@ -39,7 +39,13 @@ const Header = (props) => {
           <PageMoving>
             <PageMoving_Ul>
               <PageMoving_list className="greeting">
-                <button>{localStorage.getItem("nick")}</button>
+                <button>
+                  Welcome,{" "}
+                  {localStorage
+                    .getItem("nick")
+                    .replace('"', "")
+                    .replace('"', "")}
+                </button>
               </PageMoving_list>
               <PageMoving_list className="toMyInfo">
                 <button>내정보</button>
@@ -56,7 +62,7 @@ const Header = (props) => {
             </PageMoving_Ul>
           </PageMoving>
           {/* Navbar */}
-          <Navbar id="navbar">
+          <Navbar ref={ref}>
             {/* 로고 들어가는 곳 */}
             <LogoBox>
               <button
@@ -247,6 +253,10 @@ const NavbarBtn_list = styled.li`
   }
 
   & > button:hover {
+    border-bottom: 5px solid #fed049;
+  }
+
+  & > button:focus {
     border-bottom: 5px solid #fed049;
   }
 `;

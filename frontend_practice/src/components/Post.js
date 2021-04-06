@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import "../shared/App.css";
 import Grid from "../elements/Grid";
+import { history } from "../redux/configureStore";
 
 const Post = (props) => {
   const { summary, name, per, old_price, price, size, text, delivery } = props;
@@ -9,15 +10,26 @@ const Post = (props) => {
   return (
     <Grid>
       <Item>
-        <MainImage>
+        <MainImage
+          onClick={() => {
+            history.push(`/detail/1`);
+          }}
+        >
           <img
             src="https://kukka-2-media-123.s3.amazonaws.com/media/class-name/Contents/2356/category.jpg"
-            style={{width:"100%", height: "265px" }}
+            style={{ width: "100%", height: "265px" }}
           ></img>
         </MainImage>
         <Detail>
           <Summary>{summary}</Summary>
-          <Name style={{ cursor: "pointer" }}>{name}</Name>
+          <Name
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              history.push(`/detail/1`);
+            }}
+          >
+            {name}
+          </Name>
           <br />
           <Per>{per}</Per>
           <Old_price>{old_price}</Old_price>
