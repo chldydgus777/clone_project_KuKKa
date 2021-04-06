@@ -48,7 +48,7 @@ const Login = (props) => {
       <LoginTitle>로그인</LoginTitle>
       <LoginBox>
         <Input placeholder="아이디(이메일)" _onChange={changeId} />
-        <Input placeholder="비밀번호" _onChange={changePwd} />
+        <Input placeholder="비밀번호" _onChange={changePwd} type="password" />
         <Button
           _onClick={login}
           is_header
