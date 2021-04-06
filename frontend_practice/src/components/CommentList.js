@@ -7,9 +7,9 @@ import Modal from "react-modal";
 import Input from "../elements/Input";
 
 const CommentList = (props) => {
-  //const is_login = useSelector((state) => state.user.is_login);
+  const is_login = useSelector((state) => state.user.is_login);
 
-  const is_login = true;
+  // const is_login = true;
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   // modal operation

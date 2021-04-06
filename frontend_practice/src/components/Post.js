@@ -2,19 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import "../shared/App.css";
 import Grid from "../elements/Grid";
+import { history } from "../redux/configureStore"
+import { CALL_HISTORY_METHOD } from "connected-react-router";
 
 
 const Post = (props) => {
   const {mainImage, summary, flower, per, oldPrice, price, size, text, delivery } = props;
-
+// props id 찍어보기
 
   return (
-   
+  
     <Grid>
      {/* card */}
       <Item>
       <div style={{overflow:"hidden", width:"100%", height: "265px" }}>
-        <MainImage>
+        <MainImage onClick={()=>{
+          history.push(`/detail/${props.id}`)
+        }}>
           <img
             src={mainImage}
             style={{width:"100%", height: "265px" }}
@@ -23,7 +27,10 @@ const Post = (props) => {
         </div>
         <Detail>
           <Summary>{summary}</Summary>
-          <Flower style={{ cursor: "pointer" }}>{flower}</Flower>
+          <Flower style={{ cursor: "pointer" }}e 
+          onClick={()=>{
+          history.push(`/detail/${props.id}`)
+        }}>{flower}</Flower>
           <br />
           <Per>{per}</Per>
           <Old_price>{oldPrice}</Old_price>

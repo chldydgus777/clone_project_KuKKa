@@ -84,16 +84,9 @@ const signupDB = (id, pwd, nickname) => {
       },
     })
       .then((res) => {
-        // console 찍어보기 res
-        dispatch(
-          setUser({
-            username: id,
-            nickname: nickname,
-            password: pwd,
-          })
-        );
-        localStorage.setItem("nick", JSON.stringify(`${id}`));
-        history.push("/");
+        //console 찍어보기 res
+        console.log("이건 signupDB 함수야!");
+        window.location.href = "/";
         window.alert("환영합니다!");
       })
       .catch((err) => {

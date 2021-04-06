@@ -42,9 +42,7 @@ const Header = (props) => {
                 <button>
                   Welcome,{" "}
                   {localStorage
-                    .getItem("nick")
-                    .replace('"', "")
-                    .replace('"', "")}
+                    .getItem("nick")}
                 </button>
               </PageMoving_list>
               <PageMoving_list className="toMyInfo">
