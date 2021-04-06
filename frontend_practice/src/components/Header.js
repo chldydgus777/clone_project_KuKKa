@@ -4,13 +4,15 @@ import Button from "../elements/Button";
 import LogoPic from "../images/LogoPhoto.png";
 import "../shared/mystyle.css";
 import { history } from "../redux/configureStore";
-import { getCookie } from "../shared/Cookie";
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/user";
 
 import Cart from "../images/func_cart.png";
 import Mypage from "../images/func_my.png";
 
 const Header = (props) => {
-  const is_login = getCookie("is_login") === "success" ? true : false;
+  const dispatch = useDispatch();
+  const is_login = useSelector((state) => state.user.is_login);
 
   if (is_login) {
     return (
@@ -19,14 +21,20 @@ const Header = (props) => {
           {/* 로그인, 회원가입, 기업제휴 */}
           <PageMoving>
             <PageMoving_Ul>
+              <PageMoving_list className="greeting">
+                <button>회원님 환영합니다!</button>
+              </PageMoving_list>
               <PageMoving_list className="toMyInfo">
                 <button>내정보</button>
               </PageMoving_list>
               <PageMoving_list className="toSignOut">
-                <button>로그아웃</button>
-              </PageMoving_list>
-              <PageMoving_list className="toCompany">
-                <button>기업제휴</button>
+                <button
+                  onClick={() => {
+                    dispatch(userActions.logOutDB());
+                  }}
+                >
+                  로그아웃
+                </button>
               </PageMoving_list>
             </PageMoving_Ul>
           </PageMoving>
@@ -143,12 +151,12 @@ const Header = (props) => {
           <IconBox>
             <Icon>
               <button>
-              <img src={Mypage}></img>
+                <img src={Mypage}></img>
               </button>
             </Icon>
             <Icon>
               <button>
-              <img src={Cart}></img>
+                <img src={Cart}></img>
               </button>
             </Icon>
           </IconBox>

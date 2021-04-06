@@ -8,7 +8,6 @@ import login_facebook from "../images/login_Facebook.png";
 import login_naver from "../images/login_Naver.png";
 import login_kakao from "../images/login_Kakao.png";
 
-
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
 import { emailCheck } from "../shared/common";
@@ -40,7 +39,7 @@ const Login = (props) => {
     }
 
     console.log(id, pwd);
-    dispatch(userActions.loginAction({ user_id: id, user_pwd: pwd }));
+    dispatch(userActions.loginDB(id, pwd));
     console.log("로그인 완료!");
   };
 
@@ -62,14 +61,15 @@ const Login = (props) => {
         <SnsLoginBox>
           <Text>SNS계정으로 간편 로그인</Text>
           <SnsIconBox>
-              <button>
+            <button>
               <img src={login_facebook}></img>
-              </button>
-              <button>
+            </button>
+            <button>
               <img src={login_naver}></img>
-              </button>
-              <button><img src={login_kakao}></img>
-              </button>
+            </button>
+            <button>
+              <img src={login_kakao}></img>
+            </button>
           </SnsIconBox>
           <Button
             is_header
@@ -117,14 +117,13 @@ const SnsLoginBox = styled.div`
 
 // sns Icon box
 const SnsIconBox = styled.div`
-width: 100%;
-margin : 0 auto;
+  width: 100%;
+  margin: 0 auto;
   & > button {
     width: 20%;
   }
   & > button > img {
-    
-    display : flex;
+    display: flex;
   }
 `;
 

@@ -2,11 +2,11 @@ import { createAction, handleActions } from "redux-actions";
 // 불변성 관리 위한 친구
 import { produce } from "immer";
 import { setCookie, getCookie, deleteCookie } from "../../shared/Cookie";
-import axios from 'axios';
+import axios from "axios";
 
 // actions
 //const LOG_IN = "LOG_IN";
-const SIGN_UP = "SIGN_UP"
+const SIGN_UP = "SIGN_UP";
 const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
 const SET_USER = "SET_USER";
@@ -14,10 +14,9 @@ const SET_USER = "SET_USER";
 // initialState
 
 const initialState = {
-  user: [
-  ],
+  user: null,
   is_login: false,
-  signup : null,
+  //signup: null,
 };
 
 const user_initial = {
@@ -40,28 +39,33 @@ const loginAction = (user) => {
 
 const loginDB = (id, pwd) => {
   return function (dispatch, getState, { history }) {
-    //     auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then((res) => {
-    //       auth
-    //         .signInWithEmailAndPassword(id, pwd)
-    //         .then((user) => {
-    //           console.log(user);
-    //           dispatch(
-    //             setUser({
-    //               user_name: user.user.displayName,
-    //               id: id,
-    //               user_profile: "",
-    //               uid: user.user.uid,
-    //             })
-    //           );
-    //           history.push("/");
-    //         })
-    //         .catch((error) => {
-    //           var errorCode = error.code;
-    //           var errorMessage = error.message;
-    //           console.log(errorCode, errorMessage);
-    //         });
-    //     });
-    //   };
+    axios({
+      method: "POST",
+      url: "http://3.143.205.173:8080/api/login",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+      data: {
+        username: id,
+        password: pwd,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        sessionStorage.setItem("token", res.data);
+        dispatch(
+          setUser({
+            username: id,
+            password: pwd,
+          })
+        );
+        history.push("/");
+        window.alert("정상적으로 로그인 되었습니다!");
+      })
+      .catch((err) => {
+        window.alert(err.response.data.errorMessage);
+      });
   };
 };
 
@@ -69,58 +73,58 @@ const loginDB = (id, pwd) => {
 
 const signupDB = (id, pwd, nickname) => {
   return function (dispatch, getState, { history }) {
-    axios ({
-      method : "POST",
-      url : "http://3.143.205.173:8080/api/signup",
-      data : {
-        username : id,
-        nickname : nickname,
-        password : pwd,
-        
+    axios({
+      method: "POST",
+      url: "http://3.143.205.173:8080/api/signup",
+      data: {
+        username: id,
+        nickname: nickname,
+        password: pwd,
       },
     })
       .then((res) => {
-        // console 찍어보기 res 
+        // console 찍어보기 res
         dispatch(
           setUser({
-            username : id,
-            nickname : nickname,
-            password : pwd,
+            username: id,
+            nickname: nickname,
+            password: pwd,
           })
-        )
-        history.push('/');
+        );
+        history.push("/");
+        window.alert("환영합니다!");
+      })
+      .catch((err) => {
+        window.alert("회원가입에 실패했습니다", err);
       });
-    }
-}
+  };
+};
 
-      
-
-    // auth
-    //       .createUserWithEmailAndPassword(id, pwd)
-    //       .then((user) => {
-    //         console.log(user);
-    //         auth.currentUser
-    //           .updateProfile({
-    //             displayName: user_name,
-    //           })
-    //           .then(() => {
-    //             dispatch(
-    //               setUser({
-    //                 user_name: user_name,
-    //                 id: id,
-    //                 user_profile: "",
-    //                 uid: user.user.uid,
-    //               })
-    //             );
-    //             history.push("/");
-    //           });
-    //       })
-    //       .catch((error) => {
-    //         var errorCode = error.code;
-    //         var errorMessage = error.message;
-    //         console.log(errorCode, errorMessage);
-    //       });
-
+// auth
+//       .createUserWithEmailAndPassword(id, pwd)
+//       .then((user) => {
+//         console.log(user);
+//         auth.currentUser
+//           .updateProfile({
+//             displayName: user_name,
+//           })
+//           .then(() => {
+//             dispatch(
+//               setUser({
+//                 user_name: user_name,
+//                 id: id,
+//                 user_profile: "",
+//                 uid: user.user.uid,
+//               })
+//             );
+//             history.push("/");
+//           });
+//       })
+//       .catch((error) => {
+//         var errorCode = error.code;
+//         var errorMessage = error.message;
+//         console.log(errorCode, errorMessage);
+//       });
 
 const loginCheckDB = () => {
   return function (dispatch, getState, { history }) {
@@ -154,6 +158,9 @@ const loginCheckDB = () => {
 
 const logOutDB = () => {
   return function (dispatch, getState, { history }) {
+    sessionStorage.removeItem("token");
+    dispatch(logOut());
+    history.replace("/");
     // auth.signOut().then(() => {
     //   dispatch(logOut());
     //   history.replace("/");
@@ -167,7 +174,7 @@ const logOutDB = () => {
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
-const signUp = createAction(SIGN_UP, (id, pwd) => ({ id, pwd }))
+const signUp = createAction(SIGN_UP, (id, pwd) => ({ id, pwd }));
 
 // reducer
 
@@ -175,12 +182,11 @@ export default handleActions(
   {
     [SET_USER]: (state, action) =>
       produce(state, (draft) => {
-        setCookie("is_login", "success");
         draft.user = action.payload.user;
         draft.is_login = true;
       }),
 
-      [SIGN_UP]: (state, action) =>
+    [SIGN_UP]: (state, action) =>
       produce(state, (draft) => {
         draft.user.push(action.payload.user);
         draft.is_login = true;
@@ -188,7 +194,6 @@ export default handleActions(
 
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
-        deleteCookie("is_login");
         draft.user = null;
         draft.is_login = false;
       }),
