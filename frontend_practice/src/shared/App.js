@@ -5,7 +5,7 @@ import PostList from "../components/PostList";
 import { ConnectedRouter } from "connected-react-router";
 import { BrowserRouter, Route } from "react-router-dom";
 import { history } from "../redux/configureStore";
-import React from "react";
+import React, { useDebugValue } from "react";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import PostDetail from "../pages/PostDetail";
@@ -15,6 +15,18 @@ import { actionCreators as userActions } from "../redux/modules/user";
 import { useDispatch, useSelector } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
+  const is_session = sessionStorage.getItem("token");
+
+  // login maintenace
+  React.useEffect(() => {
+    if (user) {
+      return;
+    }
+    dispatch(userActions.loginCheckDB(is_session));
+  }, []);
+
   return (
     <React.Fragment>
       <Header />

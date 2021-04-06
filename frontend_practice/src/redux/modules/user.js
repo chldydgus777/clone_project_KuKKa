@@ -53,6 +53,7 @@ const loginDB = (id, pwd) => {
     })
       .then((res) => {
         console.log(res);
+        localStorage.setItem("nick", JSON.stringify(`${id}`));
         sessionStorage.setItem("token", res.data.token);
         dispatch(
           setUser({
@@ -64,7 +65,7 @@ const loginDB = (id, pwd) => {
         window.alert("정상적으로 로그인 되었습니다!");
       })
       .catch((err) => {
-        window.alert(err.res.data.errorMessage);
+        window.alert(err);
       });
   };
 };
@@ -91,6 +92,7 @@ const signupDB = (id, pwd, nickname) => {
             password: pwd,
           })
         );
+        localStorage.setItem("nick", JSON.stringify(`${id}`));
         history.push("/");
         window.alert("환영합니다!");
       })
@@ -100,25 +102,20 @@ const signupDB = (id, pwd, nickname) => {
   };
 };
 
-const loginCheckDB = () => {
+const loginCheckDB = (is_session) => {
   return function (dispatch, getState, { history }) {
-    //const user = getState().user.user;
-    const user = loginInfo.pop();
-
-    if (user) {
-      dispatch(
-        setUser({
-          user_id: user.user_id,
-          user_pwd: user.user_pwd,
-        })
-      );
-    } else return;
+    if (is_session) {
+      dispatch(setUser({ nickname: localStorage.getItem("nickname") }));
+    } else {
+      dispatch(logOut());
+    }
   };
 };
 
 const logOutDB = () => {
   return function (dispatch, getState, { history }) {
     sessionStorage.removeItem("token");
+    localStorage.removeItem("nick");
     dispatch(logOut());
     history.replace("/");
   };

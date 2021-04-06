@@ -10,7 +10,7 @@ import login_kakao from "../images/login_Kakao.png";
 
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
-import { emailCheck } from "../shared/common";
+// import { emailCheck } from "../shared/common";
 
 const Login = (props) => {
   const dispatch = useDispatch();
