@@ -21,7 +21,7 @@ const Post = (props) => {
         }}>
           <img
             src={mainImage}
-            style={{width:"100%", height: "265px" }}
+            style={{width:"100%", height: "265px", cursor: "pointer" }}
           ></img>
         </MainImage>
         </div>
