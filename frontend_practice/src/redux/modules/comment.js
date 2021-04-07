@@ -26,7 +26,7 @@ const initialState = {
 const addCommentDB = (post_id, contents) => {
   return function (dispatch, getState, { history }) {
     const user_info = getState().user.user;
-    const comment_list = getState().comment.list;
+    //const comment_list = getState().comment.list;
 
     let comment = {
       post_id: post_id,
@@ -35,7 +35,19 @@ const addCommentDB = (post_id, contents) => {
       insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
     };
 
-    dispatch(addComment(post_id, comment));
+    axios({
+      method: "POST",
+      url: `http://3.143.205.173:8080/api/products/${post_id}`,
+      data: comment,
+    })
+      .then((res) => {
+        //console 찍어보기 res
+        console.log("코멘트 더하기", post_id, comment);
+        dispatch(addComment(post_id, comment));
+      })
+      .catch((err) => {
+        window.alert("코멘트 기능 에러", err);
+      });
   };
 };
 

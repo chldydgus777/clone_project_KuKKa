@@ -1,21 +1,38 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Comment from "./Comment";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Rating from "../elements/Rating";
 import Modal from "react-modal";
 import Input from "../elements/Input";
+import { actionCreators as commentActions } from "../redux/modules/comment";
 
 const CommentList = (props) => {
-  const is_login = useSelector((state) => state.user.is_login);
+  const dispatch = useDispatch();
+  //const is_login = useSelector((state) => state.user.is_login);
 
-  // const is_login = true;
+  const is_login = true;
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [comment, setComment] = useState("");
 
+  const onChange = (e) => {
+    console.log(e.target.value);
+    setComment(e.target.value);
+  };
+
+  const addComment = () => {
+    if (comment === "") {
+      window.alert("댓글이 공란입니다.");
+      return;
+    }
+    console.log(`comment: ${comment} || id: ${props.id} 작성했다~`);
+    console.log(props);
+    setComment("");
+    closeModal();
+  };
   // modal operation
   // Open modal
   const openModal = (e) => {
-    console.log(e);
     setModalIsOpen(true);
   };
   // Close modal
@@ -50,9 +67,16 @@ const CommentList = (props) => {
           <ModalTitle>리뷰 작성하기</ModalTitle>
           {/* 별점부분 */}
           <Rating></Rating>
-          <ElTextarea placeholder="리뷰 작성" rows={5} />
+          <ElTextarea
+            placeholder="리뷰 작성"
+            rows={5}
+            onChange={onChange}
+            value={comment}
+          />
           <ModalBtn className="ModalBtn">
-            <BtnInModal className="BtnInModal">작성 완료</BtnInModal>
+            <BtnInModal className="BtnInModal" onClick={addComment}>
+              작성 완료
+            </BtnInModal>
             <BtnInModal className="BtnInModal" onClick={closeModal}>
               닫기
             </BtnInModal>

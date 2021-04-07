@@ -151,7 +151,7 @@ const PostDetail = (props) => {
               </Detail_Info_Box>
             </Detail_Info_Frame>
             {/* CommentList */}
-            <CommentList />
+            <CommentList id={id} />
           </PostDetail_Frame>
         </React.Fragment>
       )}
