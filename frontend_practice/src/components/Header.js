@@ -88,16 +88,16 @@ const Header = (props) => {
             </NavbarBtn_Ul>
             {/* 아이콘 박스 */}
             <IconBox>
-              <Icon>
-                <button>
-                  <i className="fas fa-user"></i>
-                </button>
-              </Icon>
-              <Icon>
-                <button>
-                  <i className="fas fa-shopping-bag"></i>
-                </button>
-              </Icon>
+            <Icon>
+              <button>
+                <img src={Mypage}></img>
+              </button>
+            </Icon>
+            <Icon>
+              <button>
+                <img src={Cart}></img>
+              </button>
+            </Icon>
             </IconBox>
           </Navbar>
         </HeaderFrame>
