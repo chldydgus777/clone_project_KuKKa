@@ -4,12 +4,19 @@ import styled from "styled-components";
 const Comment = (props) => {
   return (
     <CommentFrame>
-      <Comment_Star>별 5</Comment_Star>
-      <Comment_Title>좋네요!</Comment_Title>
-      <Comment_User>조형석</Comment_User>
-      <Comment_Date>2021-03-24</Comment_Date>
+      <Comment_Star>별 {props.stars}</Comment_Star>
+      <Comment_Title>{props.contents}</Comment_Title>
+      <Comment_User>{props.name}</Comment_User>
+      <Comment_Date>{props.insert_dt}</Comment_Date>
     </CommentFrame>
   );
+};
+
+Comment.defaultProps = {
+  stars: 5,
+  contents: "좋네요",
+  name: "조욤ㄴㅇ",
+  insert_dt: "2021-03-24 10:00:00",
 };
 
 const CommentFrame = styled.section`

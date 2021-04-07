@@ -39,11 +39,7 @@ const Header = (props) => {
           <PageMoving>
             <PageMoving_Ul>
               <PageMoving_list className="greeting">
-                <button>
-                  Welcome,{" "}
-                  {localStorage
-                    .getItem("nick")}
-                </button>
+                <button>Welcome, {localStorage.getItem("nick")}</button>
               </PageMoving_list>
               <PageMoving_list className="toMyInfo">
                 <button>내정보</button>

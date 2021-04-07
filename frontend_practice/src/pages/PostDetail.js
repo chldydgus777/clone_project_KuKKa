@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import Text from "../elements/Text";
 import Button from "../elements/Button";
@@ -7,145 +7,154 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as productActions } from "../redux/modules/post";
 
 const PostDetail = (props) => {
-  console.log(props);
-
   const dispatch = useDispatch();
   const id = props.match.params.id;
   const data = useSelector((state) => state.post.flower);
-
-  console.log(id, data);
-
-  useEffect(() => {
-    if (data) {
-      return;
-    }
-    dispatch(productActions.getProductsAPI());
-    console.log(data);
-  }, []);
-
-  const index = data.findIndex((d) => d.id === parseInt(id));
-
-  const post = data[index];
-
-  console.log(index, id, post);
-
+  let index;
+  let post;
   let discountRate;
   let percentage;
   let number;
-  if (post.per != " ") {
-    discountRate = post.per.split("");
-    percentage = discountRate.pop();
-    number = discountRate.join("");
-  } else {
-    percentage = "";
-    number = "";
-  }
   let oldPrice;
 
-  if (post.oldPrice == " ") {
-    oldPrice = "";
-  } else {
-    oldPrice = post.oldPrice;
+  React.useEffect(() => {
+    //window.alert("이거 되는 거니?");
+    if (data.length === 0) {
+      //console.log("난 데이터가 없어요.....");
+      dispatch(productActions.getProductsAPI());
+    }
+  }, []);
+
+  if (data.length >= 1) {
+    //console.log(data);
+    index = data.findIndex((d) => d.id === parseInt(id));
+
+    post = data[index];
+    if (post?.per != " ") {
+      discountRate = post?.per.split("");
+      percentage = discountRate.pop();
+      number = discountRate.join("");
+    } else {
+      percentage = "";
+      number = "";
+    }
+    let oldPrice;
+
+    if (post?.oldPrice == " ") {
+      oldPrice = "";
+    } else {
+      oldPrice = post?.oldPrice;
+    }
   }
+
+  //console.log(index, id, post);
+
+  //console.log(id, data);
+
+  //console.log(index, id, post);
 
   return (
     <React.Fragment>
-      {/* PostDetail Header */}
-      <PostDetail_Header>
-        <Text>
-          Home {">"} 꽃다발 {">"} {post.flower}
-        </Text>
-      </PostDetail_Header>
-      {/* PostDetail frame */}
-      <PostDetail_Frame>
-        <Detail_Wrapping_Box>
-          {/* PostDetail ImgBox */}
-          <PostDetail_ImgBox>
-            <img src={post.mainImage}></img>
-          </PostDetail_ImgBox>
-          {/* PostDetail InfoBox */}
-          <PostDetail_InfoBox>
-            {/* Summary Box */}
-            <Summary_Box>
-              <Summary_Text>{post.summary}</Summary_Text>
-              <Flower_Name>{post.flower}</Flower_Name>
-              <Per_Discount>
-                <span>{number}</span>
-                {percentage}
-              </Per_Discount>
-              <Old_Price>{oldPrice}</Old_Price>
-              <Price>{post.price}</Price>
-            </Summary_Box>
-            {/* Notice Box */}
-            <Notice_Box>
-              <Notice_Fresh>{post.notice}</Notice_Fresh>
-            </Notice_Box>
-            {/* Field Set */}
-            <Field_Set>
-              <Field_Set_Row>
-                <Field_Set_Title>수령일</Field_Set_Title>
-                <Field_Set_Date
-                  type="date"
-                  placeholder="수령일을 선택해주세요"
-                ></Field_Set_Date>
-              </Field_Set_Row>
-              <Field_Set_Row>
-                <Field_Set_Title>수량</Field_Set_Title>
-                <Field_Set_Btn>
-                  <button>
-                    <i className="fas fa-minus-circle"></i>
-                  </button>
-                  <span>1</span>
-                  <button>
-                    <i className="fas fa-plus-circle"></i>
-                  </button>
-                </Field_Set_Btn>
-              </Field_Set_Row>
-            </Field_Set>
-            {/* Price Info Box */}
-            <Price_InfoBox>
-              <Delivery_Type>
-                <span>{post.delivery}</span>
-              </Delivery_Type>
-              <Total_Price_Title>총 주문금액</Total_Price_Title>
-              <Total_Price>{post.price}</Total_Price>
-            </Price_InfoBox>
-            {/* Purchase Button Box */}
-            <Btn_Box>
-              <Button
-                is_header
-                text="장바구니"
-                width="200px"
-                bg="#ECECEC"
-                color="#1b1b1b"
-              />
-              <Button
-                is_header
-                text="바로구매"
-                width="200px"
-                bg="#FFCD32"
-                color="#1b1b1b"
-              />
-            </Btn_Box>
-          </PostDetail_InfoBox>
-        </Detail_Wrapping_Box>
-        {/* Product Detail Info */}
-        <Detail_Info_Header>
-          <Text size="16px" margin="0">
-            상품설명
-          </Text>
-        </Detail_Info_Header>
-        {/* Product Detail Info Frame*/}
-        <Detail_Info_Frame>
-          <Detail_Info_Box>
-            <img src={post.imageDetail}></img>
-            <Detail_Info_Title>{post.titleDetail}</Detail_Info_Title>
-            <Detail_Info_Text>{post.contentsDetail}</Detail_Info_Text>
-          </Detail_Info_Box>
-        </Detail_Info_Frame>
-        {/* CommentList */}
-        <CommentList />
-      </PostDetail_Frame>
+      {data && (
+        <React.Fragment>
+          {/* PostDetail Header */}
+          <PostDetail_Header>
+            <Text>
+              Home {">"} 꽃다발 {">"} {post?.flower}
+            </Text>
+          </PostDetail_Header>
+          {/* PostDetail frame */}
+          <PostDetail_Frame>
+            <Detail_Wrapping_Box>
+              {/* PostDetail ImgBox */}
+              <PostDetail_ImgBox>
+                <img src={post?.mainImage}></img>
+              </PostDetail_ImgBox>
+              {/* PostDetail InfoBox */}
+              <PostDetail_InfoBox>
+                {/* Summary Box */}
+                <Summary_Box>
+                  <Summary_Text>{post?.summary}</Summary_Text>
+                  <Flower_Name>{post?.flower}</Flower_Name>
+                  <Per_Discount>
+                    <span>{number}</span>
+                    {percentage}
+                  </Per_Discount>
+                  <Old_Price>{oldPrice}</Old_Price>
+                  <Price>{post?.price}</Price>
+                </Summary_Box>
+                {/* Notice Box */}
+                <Notice_Box>
+                  <Notice_Fresh>{post?.notice}</Notice_Fresh>
+                </Notice_Box>
+                {/* Field Set */}
+                <Field_Set>
+                  <Field_Set_Row>
+                    <Field_Set_Title>수령일</Field_Set_Title>
+                    <Field_Set_Date
+                      type="date"
+                      placeholder="수령일을 선택해주세요"
+                    ></Field_Set_Date>
+                  </Field_Set_Row>
+                  <Field_Set_Row>
+                    <Field_Set_Title>수량</Field_Set_Title>
+                    <Field_Set_Btn>
+                      <button>
+                        <i className="fas fa-minus-circle"></i>
+                      </button>
+                      <span>1</span>
+                      <button>
+                        <i className="fas fa-plus-circle"></i>
+                      </button>
+                    </Field_Set_Btn>
+                  </Field_Set_Row>
+                </Field_Set>
+                {/* Price Info Box */}
+                <Price_InfoBox>
+                  <Delivery_Type>
+                    <span>{post?.delivery}</span>
+                  </Delivery_Type>
+                  <Total_Price_Title>총 주문금액</Total_Price_Title>
+                  <Total_Price>{post?.price}</Total_Price>
+                </Price_InfoBox>
+                {/* Purchase Button Box */}
+                <Btn_Box>
+                  <Button
+                    is_header
+                    text="장바구니"
+                    width="200px"
+                    bg="#ECECEC"
+                    color="#1b1b1b"
+                  />
+                  <Button
+                    is_header
+                    text="바로구매"
+                    width="200px"
+                    bg="#FFCD32"
+                    color="#1b1b1b"
+                  />
+                </Btn_Box>
+              </PostDetail_InfoBox>
+            </Detail_Wrapping_Box>
+            {/* Product Detail Info */}
+            <Detail_Info_Header>
+              <Text size="16px" margin="0">
+                상품설명
+              </Text>
+            </Detail_Info_Header>
+            {/* Product Detail Info Frame*/}
+            <Detail_Info_Frame>
+              <Detail_Info_Box>
+                <img src={post?.imageDetail}></img>
+                <Detail_Info_Title>{post?.titleDetail}</Detail_Info_Title>
+                <Detail_Info_Text>{post?.contentsDetail}</Detail_Info_Text>
+              </Detail_Info_Box>
+            </Detail_Info_Frame>
+            {/* CommentList */}
+            <CommentList />
+          </PostDetail_Frame>
+        </React.Fragment>
+      )}
     </React.Fragment>
   );
 };
