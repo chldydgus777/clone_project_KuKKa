@@ -23,7 +23,7 @@ const initialState = {
   list: {},
 };
 
-const addCommentFB = (post_id, contents) => {
+const addCommentDB = (post_id, contents) => {
   return function (dispatch, getState, { history }) {
     const user_info = getState().user.user;
     const comment_list = getState().comment.list;
@@ -39,7 +39,7 @@ const addCommentFB = (post_id, contents) => {
   };
 };
 
-const getCommentFB = (post_id) => {
+const getCommentDB = (post_id) => {
   return function (dispatch, getState, { history }) {
     if (!post_id) {
       return;
@@ -71,8 +71,8 @@ export default handleActions(
 const actionCreators = {
   setComment,
   addComment,
-  getCommentFB,
-  addCommentFB,
+  getCommentDB,
+  addCommentDB,
 };
 
 export { actionCreators };

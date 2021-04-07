@@ -48,6 +48,7 @@ const CommentList = (props) => {
       <ModalFrame>
         <Modal isOpen={modalIsOpen} className="Modal">
           <ModalTitle>리뷰 작성하기</ModalTitle>
+          {/* 별점부분 */}
           <Rating></Rating>
           <ElTextarea placeholder="리뷰 작성" rows={5} />
           <ModalBtn className="ModalBtn">
