@@ -1,25 +1,20 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import {useDispatch, useSelector} from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as productActions } from "../redux/modules/post";
-
 
 import Text from "../elements/Text";
 import "../shared/mystyle.css";
 import Post from "./Post";
 
-
-
-
 const PostList = (props) => {
-  
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const data = useSelector((state) => state.post.flower)
+  const data = useSelector((state) => state.post.flower);
   useEffect(() => {
-  dispatch(productActions.getProductsAPI())
-}, [])
-console.log(data)
+    dispatch(productActions.getProductsAPI());
+  }, []);
+  console.log(data);
 
   return (
     <React.Fragment>
@@ -44,19 +39,16 @@ console.log(data)
           </button>
           추천순
         </PostList_RecommendBox>
-        
+
         <GridSub>
-        {data.map((i,idx)=>{ 
-          return <Post {...i} key={idx} />} )}
-
+          {data.map((i, idx) => {
+            return <Post {...i} key={idx} />;
+          })}
         </GridSub>
-
       </PostListFrame>
     </React.Fragment>
   );
 };
-
-
 
 // 메인 사진 kukka-2-media-123.s3.amazonaws.com/static/kukkart_new/img/kukka/category_flower.png
 // 메인 글귀

@@ -1,16 +1,59 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Text from "../elements/Text";
 import Button from "../elements/Button";
 import CommentList from "../components/CommentList";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as productActions } from "../redux/modules/post";
 
 const PostDetail = (props) => {
+  console.log(props);
+
+  const dispatch = useDispatch();
+  const id = props.match.params.id;
+  const data = useSelector((state) => state.post.flower);
+
+  console.log(id, data);
+
+  useEffect(() => {
+    if (data) {
+      return;
+    }
+    dispatch(productActions.getProductsAPI());
+    console.log(data);
+  }, []);
+
+  const index = data.findIndex((d) => d.id === parseInt(id));
+
+  const post = data[index];
+
+  console.log(index, id, post);
+
+  let discountRate;
+  let percentage;
+  let number;
+  if (post.per != " ") {
+    discountRate = post.per.split("");
+    percentage = discountRate.pop();
+    number = discountRate.join("");
+  } else {
+    percentage = "";
+    number = "";
+  }
+  let oldPrice;
+
+  if (post.oldPrice == " ") {
+    oldPrice = "";
+  } else {
+    oldPrice = post.oldPrice;
+  }
+
   return (
     <React.Fragment>
       {/* PostDetail Header */}
       <PostDetail_Header>
         <Text>
-          Home {">"} 꽃다발 {">"} 딜라잇 에디션
+          Home {">"} 꽃다발 {">"} {post.flower}
         </Text>
       </PostDetail_Header>
       {/* PostDetail frame */}
@@ -18,25 +61,24 @@ const PostDetail = (props) => {
         <Detail_Wrapping_Box>
           {/* PostDetail ImgBox */}
           <PostDetail_ImgBox>
-            <img src="https://kukka-2-media-123.s3.amazonaws.com/media/class-name/Contents/2356/0_1.jpg"></img>
+            <img src={post.mainImage}></img>
           </PostDetail_ImgBox>
           {/* PostDetail InfoBox */}
           <PostDetail_InfoBox>
             {/* Summary Box */}
             <Summary_Box>
-              <Summary_Text>행복을 전하는 밝은 기운</Summary_Text>
-              <Flower_Name>딜라잇 에디션</Flower_Name>
+              <Summary_Text>{post.summary}</Summary_Text>
+              <Flower_Name>{post.flower}</Flower_Name>
               <Per_Discount>
-                <span>10</span>%
+                <span>{number}</span>
+                {percentage}
               </Per_Discount>
-              <Old_Price>42,900원 {"->"}</Old_Price>
-              <Price>37,900원</Price>
+              <Old_Price>{oldPrice}</Old_Price>
+              <Price>{post.price}</Price>
             </Summary_Box>
             {/* Notice Box */}
             <Notice_Box>
-              <Notice_Fresh>
-                3만원 이상 구매 시, <span>무료배송!</span>
-              </Notice_Fresh>
+              <Notice_Fresh>{post.notice}</Notice_Fresh>
             </Notice_Box>
             {/* Field Set */}
             <Field_Set>
@@ -63,10 +105,10 @@ const PostDetail = (props) => {
             {/* Price Info Box */}
             <Price_InfoBox>
               <Delivery_Type>
-                <span>무료배송</span>
+                <span>{post.delivery}</span>
               </Delivery_Type>
               <Total_Price_Title>총 주문금액</Total_Price_Title>
-              <Total_Price>37,900원</Total_Price>
+              <Total_Price>{post.price}</Total_Price>
             </Price_InfoBox>
             {/* Purchase Button Box */}
             <Btn_Box>
@@ -96,21 +138,9 @@ const PostDetail = (props) => {
         {/* Product Detail Info Frame*/}
         <Detail_Info_Frame>
           <Detail_Info_Box>
-            <img src="https://kukka-2-media-123.s3.amazonaws.com/media/class-name/ContentsBlocks/2021/03/25/2_1_td8IBoZ.jpg"></img>
-            <Detail_Info_Title>
-              행복을 전하는 밝은 기운, 딜라잇 에디션
-            </Detail_Info_Title>
-            <Detail_Info_Text>
-              형형색색 다채로운 컬러를 자랑하며, <br /> 보기만 해도 눈과 마음에
-              즐거움을 주는 <br />
-              딜라잇 에디션을 만나보세요.
-              <br />
-              <br />
-              포인트가 되는 노란빛의 거베라와
-              <br /> 푸른 꽃송이가 만개한 델피늄을 함께 담아
-              <br /> 행복이 피어나는 봄을 표현한 꽃다발이랍니다.
-              <br />
-            </Detail_Info_Text>
+            <img src={post.imageDetail}></img>
+            <Detail_Info_Title>{post.titleDetail}</Detail_Info_Title>
+            <Detail_Info_Text>{post.contentsDetail}</Detail_Info_Text>
           </Detail_Info_Box>
         </Detail_Info_Frame>
         {/* CommentList */}
@@ -118,6 +148,22 @@ const PostDetail = (props) => {
       </PostDetail_Frame>
     </React.Fragment>
   );
+};
+
+PostDetail.defaultProps = {
+  mainImage:
+    "https://kukka-2-media-123.s3.amazonaws.com/media/class-name/Contents/2356/0_1.jpg",
+  summary: "행복을 전하는 밝은 기운",
+  flower: "딜라잇 에디션",
+  per: "10%",
+  oldPrice: "59,900원 ->",
+  price: "53,900원",
+  delivery: "무료배송",
+  notice: "3만원 이상 구매 시, 무료배송!",
+  imageDetail:
+    "https://kukka-2-media-123.s3.amazonaws.com/media/class-name/Contents/2356/0_1.jpg",
+  titleDetail: "행복을 전하는 밝은 기운, 딜라잇 에디션",
+  contentsDetail: `<span>형형색색 다채로운 컬러를 자랑하며,</span><br><span>보기만 해도 눈과 마음에 즐거움을 주는</span><br><span>딜라잇 에디션을 만나보세요.</span><br><span></span><br><span>포인트가 되는 노란빛의 거베라와</span><br><span>푸른 꽃송이가 만개한 델피늄을 함께 담아</span><br><span>행복이 피어나는 봄을 표현한 꽃다발이랍니다.</span>`,
 };
 
 // PostDetail Header
