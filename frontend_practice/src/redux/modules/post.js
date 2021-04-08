@@ -18,51 +18,18 @@ const getProductsAPI = () => {
     axios
       .get(products_API)
       .then((resp) => {
-        console.log(resp);
         dispatch(setProducts(resp.data));
       })
       .catch((e) => console.error(e));
   };
 };
 
-// const getOneProduct = () => {
-//   return function (dispatch, getState, { history }) {
-//     axios.get(products_API).then((res) => {
-//       res.data;
-//     });
-//   };
-// };
-
-// reducer
 export default handleActions(
   {
     [SET_POSTS]: (state, action) =>
       produce(state, (draft) => {
         draft.flower = action.payload.data;
       }),
-    //   [ADD_COMMENT]: (state, action) =>
-    //     produce(state, (draft) => {
-    //       draft.commentList.unshift(action.payload.comment);
-    //     }),
-    //   [REMOVE_COMMENT]: (state, action) =>
-    //     produce(state, (draft) => {
-    //       const id = action.payload.commentId;
-    //       draft.commentList = draft.commentList.filter((c) => {
-    //         return c.id !== id;
-    //       });
-    //     }),
-    //   [EDIT_COMMENT]: (state, action) =>
-    //     produce(state, (draft) => {
-    //       let idx = draft.commentList.findIndex(
-    //         (c) => c.id === action.payload.commentId
-    //       );
-    //       console.log(action.payload.comment);
-
-    //       draft.commentList[idx] = {
-    //         ...action.payload.comment
-    //       };
-    //     })
-    // },
   },
   initialState
 );

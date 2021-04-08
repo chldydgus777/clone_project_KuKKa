@@ -88,16 +88,16 @@ const Header = (props) => {
             </NavbarBtn_Ul>
             {/* 아이콘 박스 */}
             <IconBox>
-            <Icon>
-              <button>
-                <img src={Mypage}></img>
-              </button>
-            </Icon>
-            <Icon>
-              <button>
-                <img src={Cart}></img>
-              </button>
-            </Icon>
+              <Icon>
+                <button>
+                  <img src={Mypage}></img>
+                </button>
+              </Icon>
+              <Icon>
+                <button>
+                  <img src={Cart}></img>
+                </button>
+              </Icon>
             </IconBox>
           </Navbar>
         </HeaderFrame>
@@ -192,6 +192,11 @@ const HeaderFrame = styled.div`
   font-size: 18px;
   font-weight: 600;
   text-decoration: none solid rgb(34, 34, 34);
+
+  @media (max-width: 767px) {
+    padding: 0;
+    box-sizing: border-box;
+  }
 `;
 
 // 로그인, 회원가입, 기업제휴 부분들
@@ -201,6 +206,9 @@ const PageMoving = styled.div`
   flex-direction: row-reverse;
   font-size: 14px;
   font-weight: 300;
+  @media (max-width: 767px) {
+    display: none;
+  }
 `;
 const PageMoving_Ul = styled.ul`
   display: flex;
@@ -217,6 +225,9 @@ const Navbar = styled.nav`
   width: 100%;
   display: flex;
   padding: 10px 0;
+  @media (max-width: 767px) {
+    justify-content: space-between;
+  }
 `;
 const LogoBox = styled.div`
   width: 15vw;
@@ -227,6 +238,10 @@ const LogoBox = styled.div`
     width: 100%;
     height: 100%;
   }
+
+  @media (max-width: 767px) {
+    width: 30vw;
+  }
 `;
 
 // nav bar buttons
@@ -235,6 +250,9 @@ const NavbarBtn_Ul = styled.ul`
   padding: 0;
   width: 75%;
   justify-content: space-evenly;
+  @media (max-width: 767px) {
+    display: none;
+  }
 `;
 const NavbarBtn_list = styled.li`
   list-style: none;

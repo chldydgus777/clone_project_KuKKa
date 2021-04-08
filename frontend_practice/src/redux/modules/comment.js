@@ -2,8 +2,8 @@ import { createAction, handleActions } from "redux-actions";
 // 불변성 관리 위한 친구
 import { produce } from "immer";
 import axios from "axios";
-import { actionCreators as userActions } from "./user";
-import moment from "moment";
+import { useSelector } from "react-redux";
+
 // actions
 
 const SET_COMMENT = "SET_COMMENT";
@@ -23,27 +23,27 @@ const initialState = {
   list: {},
 };
 
-const addCommentDB = (post_id, contents) => {
+const addCommentDB = (post_id, star, contents) => {
   return function (dispatch, getState, { history }) {
-    const user_info = getState().user.user;
     //const comment_list = getState().comment.list;
 
-    let comment = {
-      post_id: post_id,
-      user_id: user_info.username,
-      contents: contents,
-      insert_dt: moment().format("YYYY-MM-DD hh:mm:ss"),
+    let comment_data = {
+      productId: post_id,
+      username: localStorage.getItem("nick").replace('"', "").replace('"', ""),
+      rate: star,
+      content: contents,
     };
-
+    console.log(comment_data);
     axios({
       method: "POST",
       url: `http://3.143.205.173:8080/api/products/${post_id}`,
-      data: comment,
+      data: comment_data,
     })
       .then((res) => {
         //console 찍어보기 res
-        console.log("코멘트 더하기", post_id, comment);
-        dispatch(addComment(post_id, comment));
+        console.log("코멘트 더하기", post_id, comment_data);
+        window.alert("코멘트 더하기", post_id, comment_data);
+        dispatch(addComment(post_id, comment_data));
       })
       .catch((err) => {
         window.alert("코멘트 기능 에러", err);
@@ -56,7 +56,24 @@ const getCommentDB = (post_id) => {
     if (!post_id) {
       return;
     }
+    axios({
+      method: "GET",
+      url: `http://3.143.205.173:8080/api/products/${post_id}`,
+    })
+      .then((res) => {
+        let list = [];
 
+        let response_data = res.data;
+
+        response_data.forEach((rd) => {
+          list.push({ ...rd });
+        });
+
+        console.log(list);
+
+        dispatch(setComment(post_id, list));
+      })
+      .catch((err) => console.log("Get Error!", err));
     // 1. 서버에다가 해당 포스트 아이디에 대한 정보를 요청해야한다.
     // 2. 포스트 아이디에 따른 데이터를 받는다
     // 3. 같은 아이디를 가진 정보들 안에서 코멘트들만 추린다. (시간 내림차순)
@@ -74,7 +91,13 @@ export default handleActions(
       }),
     [ADD_COMMENT]: (state, action) =>
       produce(state, (draft) => {
+        //draft.list[action.payload.post_id].unshift(action.payload.comment);
+        if (!draft.list[action.payload.post_id]) {
+          draft.list[action.payload.post_id] = [action.payload.comment];
+          return;
+        }
         draft.list[action.payload.post_id].unshift(action.payload.comment);
+        console.log(action.payload.post_id, action.payload.comment);
       }),
   },
   initialState

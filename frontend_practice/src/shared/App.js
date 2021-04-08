@@ -28,7 +28,7 @@ function App() {
   }, []);
 
   return (
-    <React.Fragment>
+    <AppFrame>
       <Header />
       <ConnectedRouter history={history}>
         <Grid>
@@ -36,17 +36,14 @@ function App() {
           <Route exact path="/" component={PostList} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/detail/:id" component={PostDetail} />
-          <Main />
         </Grid>
         <Footer />
       </ConnectedRouter>
-    </React.Fragment>
+    </AppFrame>
   );
 }
 
-const Main = styled.div`
-  background: #eee;
-  min-height: 100%;
+const AppFrame = styled.div`
+  box-sizing: border-box;
 `;
-
 export default App;

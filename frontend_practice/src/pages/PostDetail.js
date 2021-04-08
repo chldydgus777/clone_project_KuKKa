@@ -147,7 +147,9 @@ const PostDetail = (props) => {
               <Detail_Info_Box>
                 <img src={post?.imageDetail}></img>
                 <Detail_Info_Title>{post?.titleDetail}</Detail_Info_Title>
-                <Detail_Info_Text>{post?.contentsDetail}</Detail_Info_Text>
+                <Detail_Info_Text
+                  dangerouslySetInnerHTML={{ __html: post?.contentsDetail }}
+                ></Detail_Info_Text>
               </Detail_Info_Box>
             </Detail_Info_Frame>
             {/* CommentList */}

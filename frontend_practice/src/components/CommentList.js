@@ -2,18 +2,27 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Comment from "./Comment";
 import { useSelector, useDispatch } from "react-redux";
-import Rating from "../elements/Rating";
 import Modal from "react-modal";
-import Input from "../elements/Input";
 import { actionCreators as commentActions } from "../redux/modules/comment";
+import BeautyStars from "beauty-stars";
 
 const CommentList = (props) => {
   const dispatch = useDispatch();
   //const is_login = useSelector((state) => state.user.is_login);
+  const comment_list = useSelector((state) => state.comment.list);
+
+  React.useEffect(() => {
+    if (!comment_list[props.id]) {
+      dispatch(commentActions.getCommentDB(props.id));
+    }
+  }, []);
 
   const is_login = true;
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [comment, setComment] = useState("");
+
+  // Rating
+  const [value, setValue] = useState(0);
 
   const onChange = (e) => {
     console.log(e.target.value);
@@ -25,9 +34,10 @@ const CommentList = (props) => {
       window.alert("댓글이 공란입니다.");
       return;
     }
-    console.log(`comment: ${comment} || id: ${props.id} 작성했다~`);
-    console.log(props);
+
+    dispatch(commentActions.addCommentDB(props.id, value, comment));
     setComment("");
+    setValue("");
     closeModal();
   };
   // modal operation
@@ -56,17 +66,23 @@ const CommentList = (props) => {
         </Review_Inbox_Title>
       </Review_Inbox>
       {/* Comments */}
-      <Comment></Comment>
-      <Comment></Comment>
-      <Comment></Comment>
-      <Comment></Comment>
-      <Comment></Comment>
+      {comment_list[props.id]?.map((c) => {
+        return <Comment key={c.id} {...c} />;
+      })}
 
       <ModalFrame>
         <Modal isOpen={modalIsOpen} className="Modal">
           <ModalTitle>리뷰 작성하기</ModalTitle>
           {/* 별점부분 */}
-          <Rating></Rating>
+
+          <BeautyStars
+            value={value}
+            onChange={(value) => {
+              setValue(value);
+              console.log(value);
+            }}
+          />
+
           <ElTextarea
             placeholder="리뷰 작성"
             rows={5}

@@ -2,52 +2,64 @@ import React from "react";
 import styled from "styled-components";
 import "../shared/App.css";
 import Grid from "../elements/Grid";
-import { history } from "../redux/configureStore"
+import { history } from "../redux/configureStore";
 import { CALL_HISTORY_METHOD } from "connected-react-router";
 
-
 const Post = (props) => {
-  const {mainImage, summary, flower, per, oldPrice, price, size, text, delivery } = props;
-// props id 찍어보기
+  const {
+    mainImage,
+    summary,
+    flower,
+    per,
+    oldPrice,
+    price,
+    size,
+    text,
+    delivery,
+  } = props;
+  // props id 찍어보기
 
   return (
-  
-    <Grid>
-     {/* card */}
-      <Item>
-      <div style={{overflow:"hidden", width:"100%", height: "265px" }}>
-        <MainImage onClick={()=>{
-          history.push(`/detail/${props.id}`)
-        }}>
-          <img
-            src={mainImage}
-            style={{width:"100%", height: "265px", cursor: "pointer" }}
-          ></img>
+    <React.Fragment>
+      {/* card */}
+      <Item className="card_img">
+        <MainImage
+          className="card_mainimg"
+          onClick={() => {
+            history.push(`/detail/${props.id}`);
+          }}
+        >
+          <CardImg className="card_imgBox" src={mainImage}></CardImg>
         </MainImage>
-        </div>
+
         <Detail>
           <Summary>{summary}</Summary>
-          <Flower style={{ cursor: "pointer" }}e 
-          onClick={()=>{
-          history.push(`/detail/${props.id}`)
-        }}>{flower}</Flower>
+          <Flower
+            style={{ cursor: "pointer" }}
+            e
+            onClick={() => {
+              history.push(`/detail/${props.id}`);
+            }}
+          >
+            {flower}
+          </Flower>
           <br />
           <Per>{per}</Per>
           <Old_price>{oldPrice}</Old_price>
-          <Price style={{textAlign:"left" }}>{price}</Price>
+          <Price style={{ textAlign: "left" }}>{price}</Price>
           <br />
           <Size>{size}</Size>
           <Text>{text}</Text>
           <Delivery>{delivery}</Delivery>
         </Detail>
       </Item>
-
-    </Grid>
+    </React.Fragment>
   );
 };
 
 Post.defaultProps = {
-  mainImage : "https://kukka-2-media-123.s3.amazonaws.com/media/class-name/Contents/2356/0_1.jpg",
+  mainImage:
+    "https://kukka-2-media-123.s3.amazonaws.com/media/class-name/Contents/2356/0_1.jpg",
   summary: "수선화로 표현한 봄의 무드",
   flower: "수채화 에디션",
   per: "10%",
@@ -60,13 +72,30 @@ Post.defaultProps = {
 
 const Item = styled.div`
   padding: 0px 10px;
-  width : 285px;
+  width: 285px;
+
+  @media (max-width: 767px) {
+    width: 173.67px;
+    height: 311.67px;
+    padding: 0px 6px;
+  }
 `;
 
 const MainImage = styled.a`
-&  :hover {
+  & :hover {
     transform: scale(1.05);
     transition: transform 0.5s;
+  }
+`;
+
+const CardImg = styled.img`
+  width: 100%;
+  height: 265px;
+  cursor: pointer;
+
+  @media (max-width: 767px) {
+    width: 167.67px;
+    height: 167.67px;
   }
 `;
 

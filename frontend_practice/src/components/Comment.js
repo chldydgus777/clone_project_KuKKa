@@ -1,13 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import Rating from "../elements/Beauty_star";
 
 const Comment = (props) => {
   return (
     <CommentFrame>
-      <Comment_Star>별 {props.stars}</Comment_Star>
-      <Comment_Title>{props.contents}</Comment_Title>
-      <Comment_User>{props.name}</Comment_User>
-      <Comment_Date>{props.insert_dt}</Comment_Date>
+      <Comment_Star>
+        <Rating value={props.rate} />
+      </Comment_Star>
+      <Comment_Title>{props.content}</Comment_Title>
+      <Comment_User>{props.username}</Comment_User>
+      <Comment_Date>{props.createAt}</Comment_Date>
     </CommentFrame>
   );
 };
@@ -29,19 +32,15 @@ const CommentFrame = styled.section`
 
 const Comment_Star = styled.div`
   width: 20%;
-  background: yellow;
 `;
 const Comment_Title = styled.div`
   width: 40%;
-  background: red;
 `;
 const Comment_User = styled.div`
   width: 20%;
-  background: green;
 `;
 const Comment_Date = styled.div`
   width: 20%;
-  background: blue;
 `;
 
 export default Comment;

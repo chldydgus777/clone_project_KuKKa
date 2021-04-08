@@ -14,7 +14,6 @@ const PostList = (props) => {
   useEffect(() => {
     dispatch(productActions.getProductsAPI());
   }, []);
-  console.log(data);
 
   return (
     <React.Fragment>
@@ -63,6 +62,9 @@ const MainPicture = styled.div`
   background-repeat: no-repeat;
   padding: 0px 60px 0px 60px;
   box-sizing: border-box;
+  @media (max-width: 767px) {
+    padding: 0 20px;
+  }
 `;
 
 const MainPicture_textBox = styled.div`
@@ -71,6 +73,9 @@ const MainPicture_textBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
 `;
 
 // 포스트 리스트의 윤곽
@@ -78,6 +83,11 @@ const PostListFrame = styled.section`
   width: 100%;
   padding: 50px 300px;
   box-sizing: border-box;
+
+  @media (max-width: 767px) {
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
 `;
 
 // 포스트 리스트 추천 버튼 부분
@@ -86,12 +96,19 @@ const PostList_RecommendBox = styled.div`
   display: flex;
   flex-direction: row-reverse;
   margin-bottom: 40px;
+  @media (max-width: 767px) {
+    margin: auto;
+  }
 `;
 
 const GridSub = styled.div`
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
   grid-row-gap: 4em;
+  @media (max-width: 767px) {
+    grid-template-columns: 50% 50%;
+    grid-row-gap: 1em;
+  }
 `;
 
 export default PostList;
