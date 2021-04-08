@@ -1,16 +1,35 @@
 import React from "react";
 import styled from "styled-components";
 import Rating from "../elements/Beauty_star";
+import RatingStar from "@material-ui/lab/Rating";
+import { makeStyles } from "@material-ui/core/styles";
 
 const Comment = (props) => {
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      display: "flex",
+      flexDirection: "column",
+      "& > * + *": {
+        marginTop: theme.spacing(1),
+      },
+    },
+  }));
+
+  const classes = useStyles();
+
   return (
     <CommentFrame>
       <Comment_Star>
-        <Rating value={props.rate} />
+        <RatingStar
+          name="half-rating-read"
+          defaultValue={parseFloat(props.rate)}
+          precision={0.5}
+          readOnly
+        />
       </Comment_Star>
       <Comment_Title>{props.content}</Comment_Title>
       <Comment_User>{props.username}</Comment_User>
-      <Comment_Date>{props.createAt}</Comment_Date>
+      <Comment_Date>{props.createdAt}</Comment_Date>
     </CommentFrame>
   );
 };

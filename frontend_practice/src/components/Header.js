@@ -190,7 +190,6 @@ const HeaderFrame = styled.div`
   padding: 0 60px;
   color: #222222;
   font-size: 18px;
-  font-weight: 600;
   text-decoration: none solid rgb(34, 34, 34);
 
   @media (max-width: 767px) {
@@ -259,6 +258,7 @@ const NavbarBtn_list = styled.li`
   background: white;
   & > button {
     font-size: 18px;
+    font-weight: 500;
     padding-bottom: 10px;
     border-bottom: 5px solid white;
     box-sizing: border-box;

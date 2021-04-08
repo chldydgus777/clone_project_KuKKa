@@ -44,6 +44,6 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #ffcd32;
+  background-color: #f4abba;
   outline: none;
 }

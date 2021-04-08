@@ -8,7 +8,7 @@ import BeautyStars from "beauty-stars";
 
 const CommentList = (props) => {
   const dispatch = useDispatch();
-  //const is_login = useSelector((state) => state.user.is_login);
+  const is_login = useSelector((state) => state.user.is_login);
   const comment_list = useSelector((state) => state.comment.list);
 
   React.useEffect(() => {
@@ -17,7 +17,6 @@ const CommentList = (props) => {
     }
   }, []);
 
-  const is_login = true;
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [comment, setComment] = useState("");
 
@@ -76,12 +75,14 @@ const CommentList = (props) => {
           {/* 별점부분 */}
 
           <BeautyStars
+            inactiveColor="white"
             value={value}
             onChange={(value) => {
               setValue(value);
               console.log(value);
             }}
           />
+          <br />
 
           <ElTextarea
             placeholder="리뷰 작성"
