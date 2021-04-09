@@ -1,25 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import Rating from "../elements/Beauty_star";
 import RatingStar from "@material-ui/lab/Rating";
-import { makeStyles } from "@material-ui/core/styles";
 
 const Comment = (props) => {
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      display: "flex",
-      flexDirection: "column",
-      "& > * + *": {
-        marginTop: theme.spacing(1),
-      },
-    },
-  }));
-
-  const classes = useStyles();
-
   return (
     <CommentFrame>
       <Comment_Star>
+        {/* makes RatingStar component read-only so that it has a fixed value displayed. */}
         <RatingStar
           name="half-rating-read"
           defaultValue={parseFloat(props.rate)}
@@ -27,6 +14,7 @@ const Comment = (props) => {
           readOnly
         />
       </Comment_Star>
+      {/* takes specific values from props */}
       <Comment_Title>{props.content}</Comment_Title>
       <Comment_User>{props.username}</Comment_User>
       <Comment_Date>{props.createdAt}</Comment_Date>
@@ -41,6 +29,7 @@ Comment.defaultProps = {
   insert_dt: "2021-03-24 10:00:00",
 };
 
+// Comment Frame
 const CommentFrame = styled.section`
   width: 100%;
   padding: 25px 0 23px;
@@ -48,7 +37,7 @@ const CommentFrame = styled.section`
   border-top: 1px solid #ececec;
   display: flex;
 `;
-
+// Comment component's layout
 const Comment_Star = styled.div`
   width: 20%;
 `;

@@ -18,15 +18,13 @@ const PostDetail = (props) => {
   let oldPrice;
 
   React.useEffect(() => {
-    //window.alert("이거 되는 거니?");
+    // start when data's length is 0
     if (data.length === 0) {
-      //console.log("난 데이터가 없어요.....");
       dispatch(productActions.getProductsAPI());
     }
   }, []);
-
+  // start setting values into the variables when data's length is equal to / longer than 1.
   if (data.length >= 1) {
-    //console.log(data);
     index = data.findIndex((d) => d.id === parseInt(id));
 
     post = data[index];
@@ -46,12 +44,6 @@ const PostDetail = (props) => {
       oldPrice = post?.oldPrice;
     }
   }
-
-  //console.log(index, id, post);
-
-  //console.log(id, data);
-
-  //console.log(index, id, post);
 
   return (
     <React.Fragment>
@@ -147,6 +139,7 @@ const PostDetail = (props) => {
               <Detail_Info_Box>
                 <img src={post?.imageDetail}></img>
                 <Detail_Info_Title>{post?.titleDetail}</Detail_Info_Title>
+                {/* forces to change a string into a html component */}
                 <Detail_Info_Text
                   dangerouslySetInnerHTML={{ __html: post?.contentsDetail }}
                 ></Detail_Info_Text>

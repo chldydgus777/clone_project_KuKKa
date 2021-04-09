@@ -8,20 +8,23 @@ import BeautyStars from "beauty-stars";
 
 const CommentList = (props) => {
   const dispatch = useDispatch();
+  // checks if logined
   const is_login = useSelector((state) => state.user.is_login);
   const comment_list = useSelector((state) => state.comment.list);
 
   React.useEffect(() => {
+    // have this method start when not having a certain item of the list
     if (!comment_list[props.id]) {
       dispatch(commentActions.getCommentDB(props.id));
     }
   }, []);
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [comment, setComment] = useState("");
-
   // Rating
   const [value, setValue] = useState(0);
+
+  // Modal functions
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [comment, setComment] = useState("");
 
   const onChange = (e) => {
     console.log(e.target.value);
@@ -35,10 +38,13 @@ const CommentList = (props) => {
     }
 
     dispatch(commentActions.addCommentDB(props.id, value, comment));
+
+    // sets the modal comment input as default
     setComment("");
     setValue("");
     closeModal();
   };
+
   // modal operation
   // Open modal
   const openModal = (e) => {
@@ -55,6 +61,7 @@ const CommentList = (props) => {
         <Review_Title>
           리뷰 <span>리뷰 작성 시 200P 적립 (사진 등록 시 300P)</span>
         </Review_Title>
+        {/* show this when only logined */}
         {is_login && <button onClick={openModal}>리뷰쓰기</button>}
       </Review_Header>
       {/* 리뷰 인박스 */}
@@ -73,7 +80,6 @@ const CommentList = (props) => {
         <Modal isOpen={modalIsOpen} className="Modal">
           <ModalTitle>리뷰 작성하기</ModalTitle>
           {/* 별점부분 */}
-
           <BeautyStars
             inactiveColor="white"
             value={value}
