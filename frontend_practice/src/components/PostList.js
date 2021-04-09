@@ -11,6 +11,7 @@ const PostList = (props) => {
   const dispatch = useDispatch();
 
   const data = useSelector((state) => state.post.flower);
+  // pulls the whole info from the DB in order to display them on the main page
   useEffect(() => {
     dispatch(productActions.getProductsAPI());
   }, []);

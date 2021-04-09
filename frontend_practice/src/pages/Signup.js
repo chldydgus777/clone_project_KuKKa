@@ -120,10 +120,7 @@ const Signup = (props) => {
       window.alert("아이디, 패스워드, 닉네임을 모두 입력해주세요!");
       return;
     }
-    // if (!emailCheck(id)) {
-    //   window.alert("이메일 형식이 맞지 않습니다.");
-    //   return;
-    // }
+
     if (id === "" || pwd === "" || user_name === "") {
       window.alert("아이디, 비밀번호가 공란입니다.");
       return;

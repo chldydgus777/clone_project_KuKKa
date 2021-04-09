@@ -9,6 +9,7 @@ import { actionCreators as userActions } from "../redux/modules/user";
 import Cart from "../images/func_cart.png";
 import Mypage from "../images/func_my.png";
 
+// make a sticky header which is responsive when scrolling
 const Header = (props) => {
   const ref = useRef(null);
   const handleScroll = () => {
@@ -29,8 +30,10 @@ const Header = (props) => {
   }, []);
 
   const dispatch = useDispatch();
+  // checks if logined
   const is_login = useSelector((state) => state.user.is_login);
 
+  // shows this when only logined
   if (is_login) {
     return (
       <React.Fragment>

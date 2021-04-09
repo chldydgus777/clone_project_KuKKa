@@ -10,7 +10,6 @@ import login_kakao from "../images/login_Kakao.png";
 
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
-// import { emailCheck } from "../shared/common";
 
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -33,14 +32,7 @@ const Login = (props) => {
       return;
     }
 
-    // if (!emailCheck(id)) {
-    //   window.alert("이메일 형식이 맞지 않습니다!");
-    //   return;
-    // }
-
-    console.log(id, pwd);
     dispatch(userActions.loginDB(id, pwd));
-    console.log("로그인 완료!");
   };
 
   return (

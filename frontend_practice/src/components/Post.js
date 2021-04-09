@@ -17,7 +17,6 @@ const Post = (props) => {
     text,
     delivery,
   } = props;
-  // props id 찍어보기
 
   return (
     <React.Fragment>
@@ -36,7 +35,6 @@ const Post = (props) => {
           <Summary>{summary}</Summary>
           <Flower
             style={{ cursor: "pointer" }}
-            e
             onClick={() => {
               history.push(`/detail/${props.id}`);
             }}

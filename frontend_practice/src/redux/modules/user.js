@@ -16,26 +16,9 @@ const SET_USER = "SET_USER";
 const initialState = {
   user: null,
   is_login: false,
-  //signup: null,
-};
-
-const user_initial = {
-  user_name: "anna",
 };
 
 // middleware actions
-const loginInfo = [];
-
-const loginAction = (user) => {
-  // return function (dispatch, getState, { history }) {
-  //   console.log(history);
-  //   dispatch(setUser(user));
-  //   //실험
-  //   loginInfo.push(user);
-  //   console.log(loginInfo);
-  //   history.push("/");
-  // };
-};
 
 const loginDB = (id, pwd) => {
   return function (dispatch, getState, { history }) {
@@ -84,8 +67,6 @@ const signupDB = (id, pwd, nickname) => {
       },
     })
       .then((res) => {
-        //console 찍어보기 res
-        console.log("이건 signupDB 함수야!");
         window.location.href = "/";
         window.alert("환영합니다!");
       })
@@ -95,6 +76,7 @@ const signupDB = (id, pwd, nickname) => {
   };
 };
 
+// maintains the login status when is_session is true -> setUser with username
 const loginCheckDB = (is_session) => {
   return function (dispatch, getState, { history }) {
     if (is_session) {
@@ -116,7 +98,6 @@ const logOutDB = () => {
 
 // actionCreators
 
-//const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
@@ -143,8 +124,6 @@ export default handleActions(
         draft.user = null;
         draft.is_login = false;
       }),
-
-    [GET_USER]: (state, action) => produce(state, (draft) => {}),
   },
   initialState
 );
@@ -152,8 +131,6 @@ export default handleActions(
 // action creator export
 
 const actionCreators = {
-  //logIn,
-  loginAction,
   logOut,
   signUp,
   setUser,
