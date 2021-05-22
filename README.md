@@ -5,17 +5,17 @@
 
  최용현
 
-담당부분
+Part
 
 -  Footer 뷰 
 -  꽃다발 Page View / Axios Get 요청 구현
 -  로그인 회원가입 Axios Post 요청 구현
 
-팀원 
+Team 
 
-Yonghyeon Choi (Front-end)
-Hyungseok Henry Cho (Front-end)
-Eunjin Park (Back-end)
-Joonyeop Kim (Back-end)
+* Yonghyeon Choi (Front-end) </br>
+* Hyungseok Henry Cho (Front-end) </br>
+* Eunjin Park (Back-end) </br>
+* Joonyeop Kim (Back-end)
 
 [YoutubeLink](https://www.youtube.com/watch?v=sPRQiZKwT2w)
